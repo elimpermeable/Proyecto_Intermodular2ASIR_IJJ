@@ -1,0 +1,24 @@
+site_name: Proyecto Taller_FHD
+site_description: Documentación del proyecto PI de ASIR
+site_author: Israel,Jose Carlos, Jesús
+site_url: https://elimpermeable.github.io/Proyecto_Intermodular2ASIR_IJJ/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Cambiar a modo oscuro
+    - scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Cambiar a modo claro
+
+nav:
+  - Inicio: index.md
+#  - Guía: guia.md
