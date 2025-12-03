@@ -21,4 +21,7 @@ theme:
 
 nav:
   - Inicio: index.md
+  - 01 - Caracterización: 01_caracterizacion_reto.md
+  - 02 - Análisis del contexto: 02_analisis_contexto.md
+  - 03 - Alcance y requisitos: 03_alcance_requisitos.md
 #  - Guía: guia.md
