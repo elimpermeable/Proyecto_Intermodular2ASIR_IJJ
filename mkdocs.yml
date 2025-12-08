@@ -1,4 +1,4 @@
-site_name: Proyecto Taller_FHD
+site_name: Proyecto Taller FHD
 site_description: Documentación del proyecto PI de ASIR
 site_author: Israel,Jose Carlos, Jesús
 site_url: https://elimpermeable.github.io/Proyecto_Intermodular2ASIR_IJJ/
@@ -21,7 +21,13 @@ theme:
 
 nav:
   - Inicio: index.md
-  - 01 - Caracterización: 01_caracterizacion_reto.md
-  - 02 - Análisis del contexto: 02_analisis_contexto.md
-  - 03 - Alcance y requisitos: 03_alcance_requisitos.md
+  - 01 - Introducción: 01_Introduccion.md
+  - 02 - Marco Tecnológico: 02_marco_tecnologico.md
+  - 03 - Desarrollo: 03_Desarrollo.md
+  - 04 - Resultados: 04_Resultados.md
+  - 05 - Conclusiones y mejoras futuras: 05_Conclusiones y mejoras futuras.md
+  - 06 - Bibliografia: 06_Bibliografia.md
+  - 07 - Anexos: 07_Anexos.md
+  
+
 #  - Guía: guia.md
