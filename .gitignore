@@ -1,0 +1,11 @@
+# Ignorar el sitio generado por MkDocs
+/site/
+
+# Archivos de sistema
+.DS_Store
+__pycache__/
+.pytest_cache/
+
+# Entornos virtuales
+venv/
+.venv/
