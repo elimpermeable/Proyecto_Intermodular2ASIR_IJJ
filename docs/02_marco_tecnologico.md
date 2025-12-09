@@ -89,6 +89,46 @@ Se ha optado por **Docker** por las siguientes razones:
 ### Requisitos de negocio (RN)
 - **RN-001:** Mejorar visibilidad online del sector  
 - **RN-002:** Cumplimiento RGPD/LOPD
+---
+# Especificación de requisitos por módulos
+
+El proyecto debe cubrir requisitos específicos de cada módulo del ciclo:
+
+## ASGBD (Administración de Sistemas Gestores de Bases de Datos)
+
+- Instalación y configuración de un sistema gestor de base de datos (MySQL/PostgreSQL)
+- Creación de la estructura de base de datos (tablas principales según el proyecto)
+- Configuración de seguridad básica (usuarios, permisos)
+- Script de backup automático de la base de datos
+
+## ASO (Administración de Sistemas Operativos)
+
+- Instalación y configuración de sistema operativo Linux en entorno virtualizado (GNS3, AWS o Docker)
+- Gestión de usuarios, permisos y políticas de seguridad básicas
+- Configuración de servicios del sistema (Apache, MySQL)
+- Script de automatización para backups o tareas administrativas básicas
+
+## IAW (Implantación de Aplicaciones Web)
+
+- Instalación y configuración del servidor Apache
+- Instalación y configuración de WordPress
+- Administración de usuarios en WordPress
+- Acceso a base de datos desde PHP (conexión y consultas básicas)
+- Personalización básica de WordPress (tema o plugin simple)
+
+## Servicios de Red e Internet
+
+- Configuración de SSH para acceso remoto seguro
+- Configuración de DNS básico (o uso de DNS externo)
+- Configuración de Apache como servidor web
+
+## Seguridad y Alta Disponibilidad
+
+- Configuración de firewall básico (iptables/ufw, AWS Security Groups o reglas de red Docker)
+- Configuración de HTTPS/SSL
+- Análisis básico de amenazas y medidas de protección implementadas
+- Si se usa AWS: configuración de VPC con subredes públicas y privadas
+- Si se usa Docker: configuración de redes Docker personalizadas para aislar servicios
 
 ---
 

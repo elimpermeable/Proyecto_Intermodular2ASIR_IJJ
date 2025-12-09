@@ -1,34 +1,24 @@
-# Proyecto Intermodular - Proyecto_Intermodular2ASIR_IJJ
+# INFRAESTRUCTURA TI para Taller FHD
 
-Descripción: Repositorio del Proyecto Intermodular (PI) para ASIR. Contiene la documentación de la caracterización del reto, análisis del contexto, alcance, requisitos y otros entregables.
+## Resumen
+Un taller de nueva apertura en Crevillente necesita disponer de una página web relacionada con su actividad, en la cual, además de mostrar información de contacto y ubicación de la empresa, se incluyan imágenes de proyectos destacados, como motocicletas fabricadas desde cero o restauraciones completas, así como información detallada sobre los servicios ofrecidos.
 
-Estructura del repositorio:
+El proyecto consiste en la creación y publicación de un sitio web corporativo, gestionando su alojamiento y mantenimiento adecuados. De esta forma se ofrece al taller una plataforma digital funcional que mejore su visibilidad, facilite el acceso de los clientes a la información y sirva como carta de presentación profesional.
 
-- `README.md` - Esta descripción y enlaces.
-- `docs/` - Documentación en Markdown (caracterización, análisis, alcance y requisitos).
-- `site/` - Sitio generado por MkDocs (no versionado normalmente).
-- `src/` - Código fuente (si aplica).
-- `scripts/` - Scripts de automatización.
-- `backups/` - Backups y documentación de backups.
-- `anexos/` - Diagramas, capturas y esquemas.
+## Introducción
 
-Página del proyecto (GitHub Pages):
-https://elimpermeable.github.io/Proyecto_Intermodular2ASIR_IJJ/
+### Título del reto
+Despliegue inicial de un sitio web corporativo para un taller de personalización y restauración de motocicletas
 
-Instrucciones rápidas:
+### Contexto de la empresa / organización
+El proyecto se plantea para un taller de reciente apertura situado en Crevillente, especializado en la restauración completa de motocicletas, fabricación de piezas personalizadas y mantenimiento general. Actualmente, el taller no cuenta con presencia digital, lo que dificulta que los potenciales clientes conozcan sus servicios, su ubicación y trabajos realizados. Debido a su reciente actividad, el taller busca mejorar su visibilidad y generar un canal de contacto accesible.
 
-1. Edita los archivos en `docs/` para completar la documentación.
-2. Genera el sitio localmente:
+### Problemática identificada
+Actualmente, el taller presenta las siguientes limitaciones:
 
-```bash
-pip install mkdocs mkdocs-material
-mkdocs serve
-```
+- No dispone de página web ni medios digitales formales.
+- No existe un repositorio público de sus trabajos para mostrar calidad y experiencia.
+- La comunicación con el cliente se realiza únicamente a nivel presencial o mediante mensajería móvil.
+- No hay un punto de referencia donde consultar ubicación, horarios o servicios.
 
-3. Para desplegar en GitHub Pages:
-
-```bash
-mkdocs gh-deploy
-```
-
-Contacto: Israel, Jose Carlos, Jesús
+Esta situación reduce su alcance comercial y limita la captación de nuevos clientes, especialmente aquellos que buscan referencias previas antes de contratar un servicio.

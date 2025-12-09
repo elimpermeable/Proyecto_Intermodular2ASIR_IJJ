@@ -62,3 +62,4 @@ Plantear el despliegue de una solución web alojada en un servidor propio que mu
 ---
 
 > La prioridad del proyecto se centra en el propietario del taller, en los requisitos académicos establecidos por el tutor y, de manera indirecta, en el futuro usuario final que consultará la web.
+
