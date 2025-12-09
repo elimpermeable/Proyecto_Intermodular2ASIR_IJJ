@@ -557,17 +557,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#matriz-de-trazabilidad-de-requisitos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Matriz de trazabilidad de requisitos
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -943,17 +932,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#matriz-de-trazabilidad-de-requisitos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Matriz de trazabilidad de requisitos
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1067,6 +1045,45 @@
 <ul>
 <li><strong>RN-001:</strong> Mejorar visibilidad online del sector  </li>
 <li><strong>RN-002:</strong> Cumplimiento RGPD/LOPD</li>
+</ul>
+<hr />
+<h1 id="especificacion-de-requisitos-por-modulos">Especificación de requisitos por módulos</h1>
+<p>El proyecto debe cubrir requisitos específicos de cada módulo del ciclo:</p>
+<h2 id="asgbd-administracion-de-sistemas-gestores-de-bases-de-datos">ASGBD (Administración de Sistemas Gestores de Bases de Datos)</h2>
+<ul>
+<li>Instalación y configuración de un sistema gestor de base de datos (MySQL/PostgreSQL)</li>
+<li>Creación de la estructura de base de datos (tablas principales según el proyecto)</li>
+<li>Configuración de seguridad básica (usuarios, permisos)</li>
+<li>Script de backup automático de la base de datos</li>
+</ul>
+<h2 id="aso-administracion-de-sistemas-operativos">ASO (Administración de Sistemas Operativos)</h2>
+<ul>
+<li>Instalación y configuración de sistema operativo Linux en entorno virtualizado (GNS3, AWS o Docker)</li>
+<li>Gestión de usuarios, permisos y políticas de seguridad básicas</li>
+<li>Configuración de servicios del sistema (Apache, MySQL)</li>
+<li>Script de automatización para backups o tareas administrativas básicas</li>
+</ul>
+<h2 id="iaw-implantacion-de-aplicaciones-web">IAW (Implantación de Aplicaciones Web)</h2>
+<ul>
+<li>Instalación y configuración del servidor Apache</li>
+<li>Instalación y configuración de WordPress</li>
+<li>Administración de usuarios en WordPress</li>
+<li>Acceso a base de datos desde PHP (conexión y consultas básicas)</li>
+<li>Personalización básica de WordPress (tema o plugin simple)</li>
+</ul>
+<h2 id="servicios-de-red-e-internet">Servicios de Red e Internet</h2>
+<ul>
+<li>Configuración de SSH para acceso remoto seguro</li>
+<li>Configuración de DNS básico (o uso de DNS externo)</li>
+<li>Configuración de Apache como servidor web</li>
+</ul>
+<h2 id="seguridad-y-alta-disponibilidad">Seguridad y Alta Disponibilidad</h2>
+<ul>
+<li>Configuración de firewall básico (iptables/ufw, AWS Security Groups o reglas de red Docker)</li>
+<li>Configuración de HTTPS/SSL</li>
+<li>Análisis básico de amenazas y medidas de protección implementadas</li>
+<li>Si se usa AWS: configuración de VPC con subredes públicas y privadas</li>
+<li>Si se usa Docker: configuración de redes Docker personalizadas para aislar servicios</li>
 </ul>
 <hr />
 <h2 id="matriz-de-trazabilidad-de-requisitos">Matriz de trazabilidad de requisitos</h2>
