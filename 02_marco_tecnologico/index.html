@@ -1069,10 +1069,8 @@
 - <strong>Servidor web:</strong> Apache<br />
 - <strong>CMS:</strong> WordPress<br />
 - <strong>Sistema gestor de bases de datos:</strong> MySQL<br />
-- <strong>Lenguajes:</strong> PHP, SQL<br />
 - <strong>Control de versiones:</strong> Git y GitHub<br />
-- <strong>Documentación técnica:</strong> GitHub Pages<br />
-- <strong>Automatización:</strong> scripts del sistema y tareas programadas (cron)</p>
+- <strong>Documentación técnica:</strong> GitHub Pages  </p>
 <h4 id="justificacion-de-la-plataforma-de-virtualizacion">Justificación de la plataforma de virtualización</h4>
 <p>Se ha seleccionado Docker como entorno de virtualización por los siguientes motivos:
 - Permite el aislamiento de servicios mediante contenedores independientes.
@@ -1096,7 +1094,7 @@
 </li>
 <li>
 <p><strong>Seguridad, copias de seguridad y documentación</strong><br />
-   Aplicación de medidas de seguridad, configuración de HTTPS, automatización de copias de seguridad y publicación de la documentación técnica.<br />
+   Aplicación de medidas de seguridad, configuración de HTTPS, copias de seguridad y publicación de la documentación técnica.<br />
    Entregable: sistema validado y documentación final.</p>
 </li>
 </ol>
@@ -1107,14 +1105,17 @@
 <h3 id="14-alcance-de-recursos">1.4 Alcance de recursos</h3>
 <h4 id="equipo-y-roles">Equipo y roles</h4>
 <ul>
-<li><strong>Alumno (administrador de sistemas):</strong> responsable del diseño, configuración, automatización y documentación del sistema.</li>
+<li><strong>Jesús:</strong> Responsable de la instalación,administración y mantenimiento de tanto el Ubuntu server HOST, como de las redes y contenedores gestionados en docker.</li>
+<li><strong>Jose Carlos:</strong> Responsable de la creación,mantenimiento y gestión de la base de datos adapatada a las necesidades pertinentes del taller.</li>
+<li><strong>Israel:</strong> Responsable de el diseño de la página web y de el firewall personalizado del servidor .</li>
 <li><strong>Tutor del proyecto:</strong> supervisión y validación de los entregables.</li>
 </ul>
 <h4 id="presupuesto-estimado">Presupuesto estimado</h4>
-<p>El proyecto se desarrolla utilizando exclusivamente software libre y servicios gratuitos:
+<p>El proyecto se desarrolla utilizando software libre y servicios gratuitos, no obstante puede estar sujeto a pagos necesarios ( validación de certificados, dominio, Sobrecostes por IP PÚBLICA):
 - Ubuntu Server, Docker, Apache, MySQL y WordPress.
 - GitHub y GitHub Pages para control de versiones y documentación.</p>
-<p>El coste económico del proyecto es <strong>nulo</strong>, limitándose al uso del equipo personal del alumno y conexión a internet.</p>
+<p>El coste económico del proyecto es <strong>nulo</strong>, limitándose al uso del equipo personal del alumno y conexión a internet.
+El coste de un despliegue real simultaneo a el proyecto, si que conllevaria los costes adicionales mencionados anteriormente.</p>
 <hr />
 <h2 id="2-requisitos-del-sistema">2. Requisitos del sistema</h2>
 <h3 id="21-requisitos-funcionales-rf">2.1 Requisitos funcionales (RF)</h3>
@@ -1135,7 +1136,6 @@
 <h3 id="23-requisitos-de-negocio-rn">2.3 Requisitos de negocio (RN)</h3>
 <ul>
 <li><strong>RN-001:</strong> Mejorar la visibilidad online del taller y su presencia digital.</li>
-<li><strong>RN-002:</strong> Cumplir con la normativa vigente en materia de protección de datos (RGPD/LOPD).</li>
 </ul>
 <hr />
 <h2 id="3-especificacion-de-requisitos-por-modulos">3. Especificación de requisitos por módulos</h2>
@@ -1143,7 +1143,7 @@
 <ul>
 <li>Instalación y configuración del sistema gestor de bases de datos MySQL.</li>
 <li>Creación y gestión de la estructura de base de datos utilizada por WordPress.</li>
-<li>Configuración de usuarios y permisos.</li>
+<li>Configuración de usuarios y sus respectivos permisos.</li>
 <li>Inclusión de la base de datos en las copias de seguridad del servidor.</li>
 </ul>
 <hr />
@@ -1152,8 +1152,9 @@
 <li>Instalación y configuración de Ubuntu Server en entorno Docker.</li>
 <li>Gestión de usuarios, permisos y políticas básicas de seguridad.</li>
 <li>Configuración y control de servicios del sistema (Apache y MySQL).</li>
-<li>Automatización de tareas administrativas mediante scripts y cron.</li>
 <li>Implementación de copias de seguridad completas del entorno.</li>
+<li>Conexión entre WordPress y la base de datos MySQL.</li>
+<li>Aislamiento de servicios mediante redes Docker personalizadas.</li>
 </ul>
 <hr />
 <h3 id="33-iaw-implantacion-de-aplicaciones-web">3.3 IAW – Implantación de Aplicaciones Web</h3>
@@ -1161,7 +1162,6 @@
 <li>Instalación y configuración del servidor web Apache.</li>
 <li>Instalación y configuración de WordPress.</li>
 <li>Administración de usuarios del CMS.</li>
-<li>Conexión entre WordPress y la base de datos MySQL.</li>
 <li>Personalización básica de la aplicación web.</li>
 </ul>
 <hr />
@@ -1170,6 +1170,7 @@
 <li>Configuración de acceso remoto seguro mediante SSH.</li>
 <li>Configuración de DNS básico o uso de DNS externo.</li>
 <li>Publicación del servicio web mediante Apache.</li>
+<li>Implementación de certificados SSL mediante <strong>Let’s Encrypt</strong>.</li>
 </ul>
 <hr />
 <h3 id="35-seguridad-y-alta-disponibilidad">3.5 Seguridad y Alta Disponibilidad</h3>
@@ -1178,7 +1179,6 @@
 <li>Implementación de certificados SSL mediante <strong>Let’s Encrypt</strong>.</li>
 <li>Configuración de Apache para forzar el uso de HTTPS.</li>
 <li>Análisis básico de amenazas y aplicación de medidas de protección.</li>
-<li>Aislamiento de servicios mediante redes Docker personalizadas.</li>
 <li>Protección frente a pérdida de datos mediante copias de seguridad a nivel de servidor.</li>
 </ul>
 <hr />
