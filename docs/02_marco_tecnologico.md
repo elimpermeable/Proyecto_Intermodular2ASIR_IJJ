@@ -34,10 +34,8 @@ Las tecnologías y plataformas seleccionadas son:
 - **Servidor web:** Apache  
 - **CMS:** WordPress  
 - **Sistema gestor de bases de datos:** MySQL  
-- **Lenguajes:** PHP, SQL  
 - **Control de versiones:** Git y GitHub  
 - **Documentación técnica:** GitHub Pages  
-- **Automatización:** scripts del sistema y tareas programadas (cron)
 
 #### Justificación de la plataforma de virtualización
 
@@ -63,7 +61,7 @@ El proyecto se desarrollará en las siguientes fases:
    Entregable: entorno servidor operativo.
 
 3. **Seguridad, copias de seguridad y documentación**  
-   Aplicación de medidas de seguridad, configuración de HTTPS, automatización de copias de seguridad y publicación de la documentación técnica.  
+   Aplicación de medidas de seguridad, configuración de HTTPS, copias de seguridad y publicación de la documentación técnica.  
    Entregable: sistema validado y documentación final.
 
 Los principales hitos del proyecto son:
@@ -75,16 +73,19 @@ Los principales hitos del proyecto son:
 ### 1.4 Alcance de recursos
 
 #### Equipo y roles
-- **Alumno (administrador de sistemas):** responsable del diseño, configuración, automatización y documentación del sistema.
+- **Jesús:** Responsable de la instalación,administración y mantenimiento de tanto el Ubuntu server HOST, como de las redes y contenedores gestionados en docker.
+- **Jose Carlos:** Responsable de la creación,mantenimiento y gestión de la base de datos adapatada a las necesidades pertinentes del taller.
+- **Israel:** Responsable de el diseño de la página web y de el firewall personalizado del servidor .
 - **Tutor del proyecto:** supervisión y validación de los entregables.
 
 #### Presupuesto estimado
 
-El proyecto se desarrolla utilizando exclusivamente software libre y servicios gratuitos:
+El proyecto se desarrolla utilizando software libre y servicios gratuitos, no obstante puede estar sujeto a pagos necesarios ( validación de certificados, dominio, Sobrecostes por IP PÚBLICA):
 - Ubuntu Server, Docker, Apache, MySQL y WordPress.
 - GitHub y GitHub Pages para control de versiones y documentación.
 
 El coste económico del proyecto es **nulo**, limitándose al uso del equipo personal del alumno y conexión a internet.
+El coste de un despliegue real simultaneo a el proyecto, si que conllevaria los costes adicionales mencionados anteriormente.
 
 ---
 
@@ -110,7 +111,6 @@ El coste económico del proyecto es **nulo**, limitándose al uso del equipo per
 ### 2.3 Requisitos de negocio (RN)
 
 - **RN-001:** Mejorar la visibilidad online del taller y su presencia digital.
-- **RN-002:** Cumplir con la normativa vigente en materia de protección de datos (RGPD/LOPD).
 
 ---
 
@@ -119,7 +119,7 @@ El coste económico del proyecto es **nulo**, limitándose al uso del equipo per
 ### 3.1 ASGBD – Administración de Sistemas Gestores de Bases de Datos
 - Instalación y configuración del sistema gestor de bases de datos MySQL.
 - Creación y gestión de la estructura de base de datos utilizada por WordPress.
-- Configuración de usuarios y permisos.
+- Configuración de usuarios y sus respectivos permisos.
 - Inclusión de la base de datos en las copias de seguridad del servidor.
 
 ---
@@ -128,8 +128,9 @@ El coste económico del proyecto es **nulo**, limitándose al uso del equipo per
 - Instalación y configuración de Ubuntu Server en entorno Docker.
 - Gestión de usuarios, permisos y políticas básicas de seguridad.
 - Configuración y control de servicios del sistema (Apache y MySQL).
-- Automatización de tareas administrativas mediante scripts y cron.
 - Implementación de copias de seguridad completas del entorno.
+- Conexión entre WordPress y la base de datos MySQL.
+- Aislamiento de servicios mediante redes Docker personalizadas.
 
 ---
 
@@ -137,7 +138,6 @@ El coste económico del proyecto es **nulo**, limitándose al uso del equipo per
 - Instalación y configuración del servidor web Apache.
 - Instalación y configuración de WordPress.
 - Administración de usuarios del CMS.
-- Conexión entre WordPress y la base de datos MySQL.
 - Personalización básica de la aplicación web.
 
 ---
@@ -146,6 +146,7 @@ El coste económico del proyecto es **nulo**, limitándose al uso del equipo per
 - Configuración de acceso remoto seguro mediante SSH.
 - Configuración de DNS básico o uso de DNS externo.
 - Publicación del servicio web mediante Apache.
+- Implementación de certificados SSL mediante **Let’s Encrypt**.
 
 ---
 
@@ -154,7 +155,6 @@ El coste económico del proyecto es **nulo**, limitándose al uso del equipo per
 - Implementación de certificados SSL mediante **Let’s Encrypt**.
 - Configuración de Apache para forzar el uso de HTTPS.
 - Análisis básico de amenazas y aplicación de medidas de protección.
-- Aislamiento de servicios mediante redes Docker personalizadas.
 - Protección frente a pérdida de datos mediante copias de seguridad a nivel de servidor.
 
 ---
