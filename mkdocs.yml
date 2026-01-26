@@ -22,8 +22,8 @@ theme:
 nav:
   - Inicio: index.md
   - 01 - Introducción: 01_Introduccion.md
-  - 02 - Marco Tecnológico: 02_marco_tecnologico.md
-  - 03 - Diseño y Planificación: 03_Diseño y Planificacion.md
+  - 02 - Marco Tecnológico: 02_Marco_tecnologico.md
+  - 03 - Planificación: 03_Planificacion.md
   - 04 - Desarrollo: 04_Desarrollo.md
   - 05 - Resultados: 05_Resultados.md
   - 06 - Conclusiones y mejoras futuras: 06_Conclusiones y mejoras futuras.md
