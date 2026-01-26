@@ -23,11 +23,12 @@ nav:
   - Inicio: index.md
   - 01 - Introducción: 01_Introduccion.md
   - 02 - Marco Tecnológico: 02_marco_tecnologico.md
-  - 03 - Desarrollo: 03_Desarrollo.md
-  - 04 - Resultados: 04_Resultados.md
-  - 05 - Conclusiones y mejoras futuras: 05_Conclusiones y mejoras futuras.md
-  - 06 - Bibliografia: 06_Bibliografia.md
-  - 07 - Anexos: 07_Anexos.md
+  - 03 - Diseño y Planificación: 03_Diseño y Planificacion.md
+  - 04 - Desarrollo: 04_Desarrollo.md
+  - 05 - Resultados: 05_Resultados.md
+  - 06 - Conclusiones y mejoras futuras: 06_Conclusiones y mejoras futuras.md
+  - 07 - Bibliografia: 07_Bibliografia.md
+  - 08 - Anexos: 08_Anexos.md
   
 
 #  - Guía: guia.md
