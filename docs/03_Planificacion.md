@@ -96,8 +96,8 @@ El equipo realiza reuniones periódicas para revisar el avance del proyecto, det
 Las decisiones técnicas relevantes se documentan y se consensúan entre los miembros del equipo.
 
 Para ello realizamos uso de herramientas como Trello:
-![Mapa_mysql](images/mysql.png)
+![Mapa_mysql](images/trello.png)
 
 Y como método de régistro mas visual cronológicamente disponemos de un diagrama de gantt que refleja los tiempos tomados para el avance de el mismo.
-![Mapa_mysql](images/grant.png.png)
+![Mapa_mysql](images/grant.png)
 
