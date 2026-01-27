@@ -113,6 +113,21 @@ El sistema se implementa sobre un **host Ubuntu Server**, que actúa como base p
     - Base de datos relacional que almacena la información de WordPress (usuarios, contenidos, configuraciones).  
     - Utiliza un **volumen Docker persistente** para asegurar la disponibilidad y recuperación de datos.
     ![Mapa_mysql](images/mysql.png)
+
+### Vehículos registrados
+
+| MATRÍCULA | MODELO     | CLIENTE     | TELÉFONO     |
+|-----------|-----------|-----------|-----------|
+| 1234ABC   | Yamaha R6  | Juan Pérez  | 600123123    |
+| 5678DEF   | Honda CBR  | Ana López   | 611222333    |
+
+### Servicios realizados
+
+| FECHA       | MATRÍCULA | DESCRIPCIÓN        |
+|-----------|-----------|-----------|
+| 2025-01-10  | 1234ABC   | Cambio de aceite   |
+| 2025-03-02  | 1234ABC   | Ajuste frenos     |
+
   - **Contenedor WordPress + Apache**
     - Servidor web Apache que gestiona el CMS WordPress.  
     - Almacena archivos de WordPress y configuraciones en un **volumen Docker persistente**.  
