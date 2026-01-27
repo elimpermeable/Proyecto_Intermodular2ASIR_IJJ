@@ -112,6 +112,7 @@ El sistema se implementa sobre un **host Ubuntu Server**, que actúa como base p
   - **Contenedor MySQL**
     - Base de datos relacional que almacena la información de WordPress (usuarios, contenidos, configuraciones).  
     - Utiliza un **volumen Docker persistente** para asegurar la disponibilidad y recuperación de datos.
+    ![Mapa_mysql](images/mysql.png)
   - **Contenedor WordPress + Apache**
     - Servidor web Apache que gestiona el CMS WordPress.  
     - Almacena archivos de WordPress y configuraciones en un **volumen Docker persistente**.  
