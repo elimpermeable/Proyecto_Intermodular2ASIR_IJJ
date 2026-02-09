@@ -7,6 +7,7 @@
 El proyecto consiste en el diseño, implementación y configuración de una **infraestructura de servidor web** destinada a alojar una plataforma web informativa para un taller especializado en restauración y personalización de motocicletas. El objetivo principal es proporcionar una solución estable, segura y fácilmente recuperable ante fallos, priorizando la administración de sistemas frente al desarrollo de la aplicación.
 
 Se incluye dentro del alcance del proyecto:
+
 - Despliegue de una página web informativa mediante WordPress.
 - Publicación de servicios ofrecidos y proyectos realizados.
 - Implementación de una galería de imágenes.
@@ -17,6 +18,7 @@ Se incluye dentro del alcance del proyecto:
 - Infraestructura preparada para futuras ampliaciones.
 
 Quedan excluidos del alcance:
+
 - Implementación de comercio electrónico o sistemas de venta online.
 - Gestión avanzada de inventario, pedidos o facturación.
 - Integración con sistemas ERP o pasarelas de pago.
@@ -40,6 +42,7 @@ Las tecnologías y plataformas seleccionadas son:
 #### Justificación de la plataforma de virtualización
 
 Se ha seleccionado Docker como entorno de virtualización por los siguientes motivos:
+
 - Permite el aislamiento de servicios mediante contenedores independientes.
 - Facilita la instalación, mantenimiento y replicabilidad del entorno.
 - Reduce el impacto de fallos en el sistema base.
@@ -65,6 +68,7 @@ El proyecto se desarrollará en las siguientes fases:
    Entregable: sistema validado y documentación final.
 
 Los principales hitos del proyecto son:
+
 - **Hito 1:** servidor configurado con servicios funcionales.
 - **Hito 2:** sistema seguro, documentado y listo para entrega.
 
@@ -81,6 +85,7 @@ Los principales hitos del proyecto son:
 #### Presupuesto estimado
 
 El proyecto se desarrolla utilizando software libre y servicios gratuitos, no obstante puede estar sujeto a pagos necesarios ( validación de certificados, dominio, Sobrecostes por IP PÚBLICA):
+
 - Ubuntu Server, Docker, Apache, MySQL y WordPress.
 - GitHub y GitHub Pages para control de versiones y documentación.
 

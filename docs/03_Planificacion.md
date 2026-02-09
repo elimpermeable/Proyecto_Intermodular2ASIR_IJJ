@@ -22,6 +22,7 @@ Cada rol tiene asignadas tareas específicas, detalladas a continuación.
 Este rol se encarga del diseño, implementación y mantenimiento de la infraestructura técnica del proyecto. En estos aspectos destacamos el mantenimiento del Ubuntu Server mas el de docker y sus contenedores y volúmenenes.
 
 **Funciones principales:**
+
 - Instalación y configuración del sistema operativo Ubuntu Server.
 - Instalación y configuración de Docker en el servidor.
 - Diseño de la arquitectura de contenedores.
@@ -38,6 +39,7 @@ Este rol se encarga del diseño, implementación y mantenimiento de la infraestr
 Este rol se centra en la implantación de la implamntación y la gestión de la base de datos.
 
 **Funciones principales:**
+
 - Instalación y configuración del contenedor de MySQL.
 - Diseño y creación de la base de datos relacional.
 - Definición de tablas, claves primarias y claves foráneas.
@@ -52,6 +54,7 @@ Este rol se centra en la implantación de la implamntación y la gestión de la 
 Este rol se encarga de el diseño de la página Wordpress y de la seguridad a nivel de internet del host.
 
 **Funciones principales:**
+
 - Diseñador de la página web a nivel de frontend y backend.
 - Verificación de correcto acceso a Wordpress desde la web.
 - Correcto uso de nftables para minimizar la exposición de puertas no deseadas al servidor.
