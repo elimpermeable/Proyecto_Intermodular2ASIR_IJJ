@@ -63,3 +63,50 @@ Plantear el despliegue de una solución web alojada en un servidor propio que mu
 
 > La prioridad del proyecto se centra en el propietario del taller, en los requisitos académicos establecidos por el tutor y, de manera indirecta, en el futuro usuario final que consultará la web.
 
+##  Requisitos del sistema
+
+###  Requisitos funcionales (RF)
+
+- **RF-001:** El sistema debe permitir la gestión de contenidos informativos mediante un CMS.
+- **RF-002:** El sistema debe permitir la visualización estructurada de servicios y proyectos.
+- **RF-003:** El sistema debe disponer de un panel básico de administración del contenido.
+
+---
+
+###  Requisitos no funcionales (RNF)
+
+- **RNF-001:** El sistema debe garantizar un tiempo de carga adecuado para el acceso web.
+- **RNF-002:** El sitio web debe ser accesible desde distintos dispositivos (diseño responsive).
+- **RNF-003:** El sistema debe disponer de **copias de seguridad completas a nivel de servidor**, que permitan la recuperación ante fallos físicos o lógicos.
+- **RNF-004:** El sistema debe garantizar comunicaciones seguras mediante el uso de **HTTPS**.
+
+---
+
+###  Requisitos de negocio (RN)
+
+- **RN-001:** Mejorar la visibilidad online del taller y su presencia digital.
+
+---
+
+### 1.3 Alcance temporal
+
+El proyecto se desarrollará en las siguientes fases:
+
+1. **Planificación y análisis**  
+   Definición del contexto, objetivos y requisitos del sistema.  
+   Entregable: documentación inicial del proyecto.
+
+2. **Implementación del entorno de sistemas**  
+   Instalación y configuración de Ubuntu Server, despliegue del entorno Docker y configuración de Apache, MySQL y WordPress.  
+   Entregable: entorno servidor operativo.
+
+3. **Seguridad, copias de seguridad y documentación**  
+   Aplicación de medidas de seguridad, configuración de HTTPS, copias de seguridad y publicación de la documentación técnica.  
+   Entregable: sistema validado y documentación final.
+
+Los principales hitos del proyecto son:
+
+- **Hito 1:** servidor configurado con servicios funcionales.
+- **Hito 2:** sistema seguro, documentado y listo para entrega.
+
+---

@@ -15,6 +15,13 @@ Cada rol tiene asignadas tareas específicas, detalladas a continuación.
 
 ---
 
+#### Equipo y roles
+- **Jesús:** Responsable de la instalación,administración y mantenimiento de tanto el Ubuntu server HOST, como de las redes y contenedores gestionados en docker.
+- **Jose Carlos:** Responsable de la creación,mantenimiento y gestión de la base de datos adapatada a las necesidades pertinentes del taller.
+- **Israel:** Responsable de el diseño de la página web y de el firewall personalizado del servidor .
+- **Tutor del proyecto:** supervisión y validación de los entregables.
+
+
 ### 1.2 Distribución de roles y responsabilidades
 
 #### Rol 1: Responsable de infraestructura y sistemas
