@@ -1,7 +1,7 @@
 ## 1. Planificación del proyecto
 
 La planificación del proyecto se ha organizado en función de un equipo de trabajo compuesto por tres integrantes.  
-Cada miembro asume un rol principal, aunque existe colaboración puntual entre roles para garantizar la coherencia y correcta integración del proyecto.
+Cada miembro asume un rol principal, aunque existe colaboración puntual entre roles para garantizar la coherencia y la correcta integración del proyecto.
 
 ### 1.1 Organización del equipo
 
@@ -13,20 +13,20 @@ El equipo de trabajo se estructura en los siguientes roles:
 
 Cada rol tiene asignadas tareas específicas, detalladas a continuación.
 
----
-
 #### Equipo y roles
-- **Jesús:** Responsable de la instalación,administración y mantenimiento de tanto el Ubuntu server HOST, como de las redes y contenedores gestionados en docker.
-- **Jose Carlos:** Responsable de la creación,mantenimiento y gestión de la base de datos adapatada a las necesidades pertinentes del taller.
-- **Israel:** Responsable de el diseño de la página web y de el firewall personalizado del servidor .
-- **Tutor del proyecto:** supervisión y validación de los entregables.
 
+- **Jesús**: responsable de la instalación, administración y mantenimiento tanto del host Ubuntu Server como de las redes y contenedores gestionados en Docker.  
+- **Jose Carlos**: responsable de la creación, mantenimiento y gestión de la base de datos, adaptada a las necesidades del taller.  
+- **Israel**: responsable del diseño de la página web y del firewall personalizado del servidor.  
+- **Tutor del proyecto**: supervisión y validación de los entregables.
+
+---
 
 ### 1.2 Distribución de roles y responsabilidades
 
 #### Rol 1: Responsable de infraestructura y sistemas
 
-Este rol se encarga del diseño, implementación y mantenimiento de la infraestructura técnica del proyecto. En estos aspectos destacamos el mantenimiento del Ubuntu Server mas el de docker y sus contenedores y volúmenenes.
+Este rol se encarga del diseño, implementación y mantenimiento de la infraestructura técnica del proyecto. En estos aspectos se incluye el mantenimiento de Ubuntu Server, así como de Docker, sus contenedores y volúmenes.
 
 **Funciones principales:**
 
@@ -43,7 +43,7 @@ Este rol se encarga del diseño, implementación y mantenimiento de la infraestr
 
 #### Rol 2: Responsable de la base de datos
 
-Este rol se centra en la implantación de la implamntación y la gestión de la base de datos.
+Este rol se centra en la implantación y la gestión de la base de datos.
 
 **Funciones principales:**
 
@@ -52,19 +52,19 @@ Este rol se centra en la implantación de la implamntación y la gestión de la 
 - Definición de tablas, claves primarias y claves foráneas.
 - Integración de WordPress con la base de datos MySQL.
 - Verificación del correcto acceso a la base de datos desde la aplicación.
-- Gestión de usuarios y permisos dentro de la base de Datos.
+- Gestión de usuarios y permisos dentro de la base de datos.
 
 ---
 
-#### Rol 3: Responsable de diseño de aplicación y seguridad.
+#### Rol 3: Responsable de diseño de aplicación y seguridad
 
-Este rol se encarga de el diseño de la página Wordpress y de la seguridad a nivel de internet del host.
+Este rol se encarga del diseño de la página WordPress y de la seguridad a nivel de internet del host.
 
 **Funciones principales:**
 
-- Diseñador de la página web a nivel de frontend y backend.
-- Verificación de correcto acceso a Wordpress desde la web.
-- Correcto uso de nftables para minimizar la exposición de puertas no deseadas al servidor.
+- Diseño de la página web a nivel de frontend y backend.
+- Verificación del correcto acceso a WordPress desde la web.
+- Uso adecuado de nftables para minimizar la exposición de puertos no deseados en el servidor.
 
 ---
 
@@ -105,9 +105,10 @@ El desarrollo del proyecto se divide en las siguientes fases:
 El equipo realiza reuniones periódicas para revisar el avance del proyecto, detectar incidencias y coordinar las tareas entre los distintos roles.  
 Las decisiones técnicas relevantes se documentan y se consensúan entre los miembros del equipo.
 
-Para ello realizamos uso de herramientas como Trello:
-![Mapa_mysql](images/trello.png)
+Para ello se hace uso de herramientas como **Trello**:
 
-Y como método de régistro mas visual cronológicamente disponemos de un diagrama de gantt que refleja los tiempos tomados para el avance de el mismo.
-![Mapa_mysql](images/grant.png)
+![Tablero de Trello](images/trello.png)
 
+Además, como método de registro visual y cronológico, se dispone de un **diagrama de Gantt** que refleja los tiempos dedicados al avance del proyecto:
+
+![Diagrama de Gantt](images/grant.png)
