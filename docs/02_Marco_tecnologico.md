@@ -99,3 +99,21 @@ El sistema se implementa sobre un **host Ubuntu Server**, que actúa como base p
 - Este diseño conceptual es **reproducible, escalable y alineado con los objetivos de ASIR**, listo para la fase de implementación.
 
 ---
+
+### 1.9 Matriz de vulnerabilidades
+
+La siguiente matriz recoge las principales vulnerabilidades asociadas a la infraestructura descrita, así como su impacto, probabilidad estimada y las medidas de mitigación previstas.
+
+| Activo / Componente              | Vulnerabilidad / Amenaza                                                 | Impacto | Probabilidad | Nivel de riesgo | Medidas de mitigación principales                                                                 |
+|----------------------------------|---------------------------------------------------------------------------|---------|-------------|-----------------|----------------------------------------------------------------------------------------------------|
+| Ubuntu Server (host)            | Sistema desactualizado (faltan parches de seguridad)                     | Alto    | Media       | Alto            | Plan de actualización periódica del sistema, uso de repositorios oficiales y revisión de avisos.  |
+| Ubuntu Server + nftables        | Reglas de firewall mal configuradas (puertos innecesarios abiertos)     | Alto    | Media       | Alto            | Definición de políticas restrictivas en **nftables**, revisión de reglas y pruebas de conectividad.|
+| Acceso SSH al host              | Uso de credenciales débiles o fuga de contraseña                         | Alto    | Media       | Alto            | Autenticación robusta, restricción de acceso SSH, uso de claves y cambio periódico de credenciales.|
+| Docker Engine                   | Exposición accidental de contenedores a la red pública                  | Alto    | Baja        | Medio           | Uso de **red interna Docker** para servicios internos y revisión de puertos publicados en Docker. |
+| Contenedor WordPress + Apache   | Vulnerabilidades en WordPress o plugins desactualizados                 | Alto    | Media       | Alto            | Actualización periódica de WordPress y plugins, uso de plugins confiables y copias de seguridad.  |
+| Contenedor WordPress + Apache   | Ataques de fuerza bruta sobre el panel de acceso                        | Medio   | Media       | Medio           | Limitación de intentos de login, uso de contraseñas fuertes y, en su caso, plugins de seguridad.  |
+| Contenedor MySQL                | Acceso no autorizado a la base de datos                                  | Alto    | Baja        | Medio           | Restricción de acceso a través de la **red interna Docker**, gestión de usuarios y permisos.      |
+| Contenedor MySQL                | Pérdida o corrupción de datos                                            | Alto    | Baja        | Medio           | Uso de **volúmenes Docker persistentes** y realización de copias de seguridad periódicas.         |
+| Volúmenes Docker (WordPress/DB) | Acceso no controlado a datos almacenados en volúmenes                   | Alto    | Baja        | Medio           | Control de permisos sobre los volúmenes y almacenamiento seguro de las copias de seguridad.       |
+| HTTPS (Let’s Encrypt)           | Caducidad de certificados o fallo en la renovación automática            | Medio   | Media       | Medio           | Monitorización del estado de los certificados y verificación de la renovación con Let’s Encrypt.  |
+| Red interna Docker              | Configuración incorrecta que permita acceso externo a servicios internos | Alto    | Baja        | Medio           | Verificación de que los servicios críticos solo son accesibles por la **red interna Docker**.     |

@@ -3,17 +3,15 @@
 La planificación del proyecto se ha organizado en función de un equipo de trabajo compuesto por tres integrantes.  
 Cada miembro asume un rol principal, aunque existe colaboración puntual entre roles para garantizar la coherencia y la correcta integración del proyecto.
 
-### 1.1 Organización del equipo
+### 1.1 Organización del equipo y roles
 
-El equipo de trabajo se estructura en los siguientes roles:
+El equipo de trabajo se estructura en los siguientes roles principales:
 
 - **Responsable de infraestructura y sistemas**
 - **Responsable de la base de datos**
 - **Responsable de diseño de aplicaciones y seguridad**
 
-Cada rol tiene asignadas tareas específicas, detalladas a continuación.
-
-#### Equipo y roles
+A cada rol se le asigna un integrante del equipo:
 
 - **Jesús**: responsable de la instalación, administración y mantenimiento tanto del host Ubuntu Server como de las redes y contenedores gestionados en Docker.  
 - **Jose Carlos**: responsable de la creación, mantenimiento y gestión de la base de datos, adaptada a las necesidades del taller.  
@@ -26,7 +24,7 @@ Cada rol tiene asignadas tareas específicas, detalladas a continuación.
 
 #### Rol 1: Responsable de infraestructura y sistemas
 
-Este rol se encarga del diseño, implementación y mantenimiento de la infraestructura técnica del proyecto. En estos aspectos se incluye el mantenimiento de Ubuntu Server, así como de Docker, sus contenedores y volúmenes.
+Este rol se encarga del diseño, implementación y mantenimiento de la infraestructura técnica del proyecto, incluyendo Ubuntu Server, Docker, sus contenedores y volúmenes.
 
 **Funciones principales:**
 
@@ -100,14 +98,16 @@ El desarrollo del proyecto se divide en las siguientes fases:
 
 ---
 
-### 1.4 Coordinación y seguimiento
+### 1.4 Coordinación y herramientas de seguimiento
 
 El equipo realiza reuniones periódicas para revisar el avance del proyecto, detectar incidencias y coordinar las tareas entre los distintos roles.  
 Las decisiones técnicas relevantes se documentan y se consensúan entre los miembros del equipo.
 
-Para ello se hace uso de herramientas como **Trello**:
+Para el seguimiento de tareas se utiliza **Trello**:
 
 ![Tablero de Trello](images/trello.png)
+
+[Enlace directo al tablero de Trello](https://trello.com/invite/b/692dd7425494b38fb1f97d27/ATTI911045e4e016ed353c414db31fc715d86DBA876E/proyecto-intermodular)
 
 Además, como método de registro visual y cronológico, se dispone de un **diagrama de Gantt** que refleja los tiempos dedicados al avance del proyecto:
 

@@ -87,6 +87,7 @@ Se incluye dentro del alcance del proyecto:
 El proyecto se basa en tecnologías de **código abierto**, alineadas con los contenidos del ciclo formativo de **Administración de Sistemas Informáticos en Red (ASIR)** y ampliamente utilizadas en entornos profesionales.
 
 Las tecnologías y plataformas seleccionadas son:
+
 - **Sistema operativo:** Ubuntu Server  
 - **Plataforma de virtualización/contenedores:** Docker  
 - **Servidor web:** Apache  
