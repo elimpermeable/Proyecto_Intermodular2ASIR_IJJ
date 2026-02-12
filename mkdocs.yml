@@ -25,6 +25,9 @@ theme:
         icon: material/brightness-4
         name: Cambiar a modo claro
 
+extra_css:
+  - custom.css
+
 nav:
   - Inicio: index.md
   - Introducción: 01_Introduccion.md
