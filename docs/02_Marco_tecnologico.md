@@ -42,16 +42,26 @@ El sistema se implementa sobre un **host Ubuntu Server**, que actúa como base p
 ### 1.4 Servicios en contenedores: WordPress y MySQL
 
 - **Contenedores principales**
-  - **Contenedor MySQL**
-    - Base de datos relacional que almacena la información de WordPress (usuarios, contenidos, configuraciones).  
-    - Utiliza un **volumen Docker persistente** para asegurar la disponibilidad y recuperación de datos.
-    ![Mapa_mysql](images/mysql.png)
 
   - **Contenedor WordPress + Apache**
     - Servidor web Apache que gestiona el CMS WordPress.  
     - Almacena archivos de WordPress y configuraciones en un **volumen Docker persistente**.  
     - Conectado a MySQL a través de la **red interna Docker** para comunicaciones seguras y aisladas.  
     - Configurado para acceso seguro mediante **HTTPS** con certificados Let’s Encrypt.
+
+
+     ![Vista de la página WordPress](images/wordpress1.png)
+
+    *Figura 2. Ejemplo de la página principal del sitio WordPress desplegado en el proyecto.*
+
+
+    **Contenedor MySQL**
+    - Base de datos relacional que almacena la información de WordPress (usuarios, contenidos, configuraciones).  
+    - Utiliza un **volumen Docker persistente** para asegurar la disponibilidad y recuperación de datos.
+    ![Mapa_mysql](images/mysql.png)
+
+    *Figura 3. Ejemplo de un posible diseño muy sencillo de la base de datos*
+    
 
 ### 1.5 Datos y vistas de la aplicación
 
@@ -68,6 +78,8 @@ El sistema se implementa sobre un **host Ubuntu Server**, que actúa como base p
 |-----------|-----------|-----------|
 | 2025-01-10  | 1234ABC   | Cambio de aceite   |
 | 2025-03-02  | 1234ABC   | Ajuste frenos     |
+
+*Figura 4. Ejemplo de las vistas disponibles en función de la base de datos propuesta anteriormente.*
 
 ### 1.6 Flujo de datos
 
