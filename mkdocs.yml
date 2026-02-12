@@ -6,17 +6,21 @@ site_url: https://elimpermeable.github.io/Proyecto_Intermodular2ASIR_IJJ/
 theme:
   name: material
   features:
-    - layout.full_width
+    - layout.full-width  
+    - navigation.expand
+    - content.code.copy
   palette:
+    # Configuración para modo claro
     - scheme: default
-      primary: blue
-      accent: blue
+      primary: blue grey 
+      accent: indigo
       toggle:
         icon: material/brightness-7
         name: Cambiar a modo oscuro
+    # Configuración para modo oscuro
     - scheme: slate
-      primary: blue
-      accent: blue
+      primary: black
+      accent: cyan
       toggle:
         icon: material/brightness-4
         name: Cambiar a modo claro
@@ -28,7 +32,7 @@ nav:
   - Planificación: 03_Planificacion.md
   - Desarrollo: 04_Desarrollo.md
   - Resultados: 05_Resultados.md
-  - Conclusiones y mejoras futuras: 06_Conclusiones y mejoras futuras.md
+  - Conclusiones y mejoras futuras: 06_Conclusiones_y_mejoras_futuras.md
   - Bibliografia: 07_Bibliografia.md
   - Anexos: 08_Anexos.md
   
