@@ -29,7 +29,7 @@
     
     
       
-        <title>02 - Marco Tecnológico - Proyecto Taller FHD</title>
+        <title>Marco Tecnológico - Proyecto Taller FHD</title>
       
     
     
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              02 - Marco Tecnológico
+              Marco Tecnológico
             
           </span>
         </div>
@@ -272,7 +272,7 @@
   <span class="md-ellipsis">
     
   
-    01 - Introducción
+    Introducción
   
 
     
@@ -308,7 +308,7 @@
   <span class="md-ellipsis">
     
   
-    02 - Marco Tecnológico
+    Marco Tecnológico
   
 
     
@@ -326,7 +326,7 @@
   <span class="md-ellipsis">
     
   
-    02 - Marco Tecnológico
+    Marco Tecnológico
   
 
     
@@ -479,6 +479,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#19-matriz-de-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.9 Matriz de vulnerabilidades
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -506,7 +517,7 @@
   <span class="md-ellipsis">
     
   
-    03 - Planificación
+    Planificación
   
 
     
@@ -533,7 +544,7 @@
   <span class="md-ellipsis">
     
   
-    04 - Desarrollo
+    Desarrollo
   
 
     
@@ -560,7 +571,7 @@
   <span class="md-ellipsis">
     
   
-    05 - Resultados
+    Resultados
   
 
     
@@ -587,7 +598,7 @@
   <span class="md-ellipsis">
     
   
-    06 - Conclusiones y mejoras futuras
+    Conclusiones y mejoras futuras
   
 
     
@@ -614,7 +625,7 @@
   <span class="md-ellipsis">
     
   
-    07 - Bibliografia
+    Bibliografia
   
 
     
@@ -641,7 +652,7 @@
   <span class="md-ellipsis">
     
   
-    08 - Anexos
+    Anexos
   
 
     
@@ -802,6 +813,17 @@
     <span class="md-ellipsis">
       
         1.8 Justificación del diseño
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#19-matriz-de-vulnerabilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.9 Matriz de vulnerabilidades
       
     </span>
   </a>
@@ -977,6 +999,110 @@
 <li>Este diseño conceptual es <strong>reproducible, escalable y alineado con los objetivos de ASIR</strong>, listo para la fase de implementación.</li>
 </ul>
 <hr />
+<h3 id="19-matriz-de-vulnerabilidades">1.9 Matriz de vulnerabilidades</h3>
+<p>La siguiente matriz recoge las principales vulnerabilidades asociadas a la infraestructura descrita, así como su impacto, probabilidad estimada y las medidas de mitigación previstas.</p>
+<table>
+<thead>
+<tr>
+<th>Activo / Componente</th>
+<th>Vulnerabilidad / Amenaza</th>
+<th>Impacto</th>
+<th>Probabilidad</th>
+<th>Nivel de riesgo</th>
+<th>Medidas de mitigación principales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu Server (host)</td>
+<td>Sistema desactualizado (faltan parches de seguridad)</td>
+<td>Alto</td>
+<td>Media</td>
+<td>Alto</td>
+<td>Plan de actualización periódica del sistema, uso de repositorios oficiales y revisión de avisos.</td>
+</tr>
+<tr>
+<td>Ubuntu Server + nftables</td>
+<td>Reglas de firewall mal configuradas (puertos innecesarios abiertos)</td>
+<td>Alto</td>
+<td>Media</td>
+<td>Alto</td>
+<td>Definición de políticas restrictivas en <strong>nftables</strong>, revisión de reglas y pruebas de conectividad.</td>
+</tr>
+<tr>
+<td>Acceso SSH al host</td>
+<td>Uso de credenciales débiles o fuga de contraseña</td>
+<td>Alto</td>
+<td>Media</td>
+<td>Alto</td>
+<td>Autenticación robusta, restricción de acceso SSH, uso de claves y cambio periódico de credenciales.</td>
+</tr>
+<tr>
+<td>Docker Engine</td>
+<td>Exposición accidental de contenedores a la red pública</td>
+<td>Alto</td>
+<td>Baja</td>
+<td>Medio</td>
+<td>Uso de <strong>red interna Docker</strong> para servicios internos y revisión de puertos publicados en Docker.</td>
+</tr>
+<tr>
+<td>Contenedor WordPress + Apache</td>
+<td>Vulnerabilidades en WordPress o plugins desactualizados</td>
+<td>Alto</td>
+<td>Media</td>
+<td>Alto</td>
+<td>Actualización periódica de WordPress y plugins, uso de plugins confiables y copias de seguridad.</td>
+</tr>
+<tr>
+<td>Contenedor WordPress + Apache</td>
+<td>Ataques de fuerza bruta sobre el panel de acceso</td>
+<td>Medio</td>
+<td>Media</td>
+<td>Medio</td>
+<td>Limitación de intentos de login, uso de contraseñas fuertes y, en su caso, plugins de seguridad.</td>
+</tr>
+<tr>
+<td>Contenedor MySQL</td>
+<td>Acceso no autorizado a la base de datos</td>
+<td>Alto</td>
+<td>Baja</td>
+<td>Medio</td>
+<td>Restricción de acceso a través de la <strong>red interna Docker</strong>, gestión de usuarios y permisos.</td>
+</tr>
+<tr>
+<td>Contenedor MySQL</td>
+<td>Pérdida o corrupción de datos</td>
+<td>Alto</td>
+<td>Baja</td>
+<td>Medio</td>
+<td>Uso de <strong>volúmenes Docker persistentes</strong> y realización de copias de seguridad periódicas.</td>
+</tr>
+<tr>
+<td>Volúmenes Docker (WordPress/DB)</td>
+<td>Acceso no controlado a datos almacenados en volúmenes</td>
+<td>Alto</td>
+<td>Baja</td>
+<td>Medio</td>
+<td>Control de permisos sobre los volúmenes y almacenamiento seguro de las copias de seguridad.</td>
+</tr>
+<tr>
+<td>HTTPS (Let’s Encrypt)</td>
+<td>Caducidad de certificados o fallo en la renovación automática</td>
+<td>Medio</td>
+<td>Media</td>
+<td>Medio</td>
+<td>Monitorización del estado de los certificados y verificación de la renovación con Let’s Encrypt.</td>
+</tr>
+<tr>
+<td>Red interna Docker</td>
+<td>Configuración incorrecta que permita acceso externo a servicios internos</td>
+<td>Alto</td>
+<td>Baja</td>
+<td>Medio</td>
+<td>Verificación de que los servicios críticos solo son accesibles por la <strong>red interna Docker</strong>.</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -1026,7 +1152,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["layout.full_width"], "search": "../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.e71a0d61.min.js"></script>
