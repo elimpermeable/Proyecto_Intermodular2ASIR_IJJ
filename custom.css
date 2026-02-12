@@ -1,0 +1,15 @@
+/* Fuerza el ancho completo */
+.md-grid {
+    max-width: 98% !important;
+}
+
+/* Mejora el aspecto de la cabecera con un tono Slate profesional */
+.md-header {
+    background-color: #334155 !important; /* Azul pizarra oscuro */
+}
+
+/* Opcional: que los enlaces del menú izquierdo resalten en verde Mint */
+.md-nav__link--active {
+    color: #40a070 !important;
+    font-weight: bold;
+}
