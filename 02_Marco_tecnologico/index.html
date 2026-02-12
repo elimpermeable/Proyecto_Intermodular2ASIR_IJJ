@@ -898,14 +898,8 @@
 <p><img alt="Esquema de los contenedores y volúmenes Docker" src="../images/docker.png" /></p>
 <h3 id="14-servicios-en-contenedores-wordpress-y-mysql">1.4 Servicios en contenedores: WordPress y MySQL</h3>
 <ul>
-<li><strong>Contenedores principales</strong></li>
 <li>
-<p><strong>Contenedor MySQL</strong></p>
-<ul>
-<li>Base de datos relacional que almacena la información de WordPress (usuarios, contenidos, configuraciones).  </li>
-<li>Utiliza un <strong>volumen Docker persistente</strong> para asegurar la disponibilidad y recuperación de datos.
-<img alt="Mapa_mysql" src="../images/mysql.png" /></li>
-</ul>
+<p><strong>Contenedores principales</strong></p>
 </li>
 <li>
 <p><strong>Contenedor WordPress + Apache</strong></p>
@@ -915,6 +909,13 @@
 <li>Conectado a MySQL a través de la <strong>red interna Docker</strong> para comunicaciones seguras y aisladas.  </li>
 <li>Configurado para acceso seguro mediante <strong>HTTPS</strong> con certificados Let’s Encrypt.</li>
 </ul>
+<p><img alt="Vista de la página WordPress" src="../images/wordpress1.png" /></p>
+<p><em>Figura 2. Ejemplo de la página principal del sitio WordPress desplegado en el proyecto.</em></p>
+<p><strong>Contenedor MySQL</strong>
+- Base de datos relacional que almacena la información de WordPress (usuarios, contenidos, configuraciones).<br />
+- Utiliza un <strong>volumen Docker persistente</strong> para asegurar la disponibilidad y recuperación de datos.
+<img alt="Mapa_mysql" src="../images/mysql.png" /></p>
+<p><em>Figura 3. Ejemplo de un posible diseño muy sencillo de la base de datos</em></p>
 </li>
 </ul>
 <h3 id="15-datos-y-vistas-de-la-aplicacion">1.5 Datos y vistas de la aplicación</h3>
@@ -965,6 +966,7 @@
 </tr>
 </tbody>
 </table>
+<p><em>Figura 4. Ejemplo de las vistas disponibles en función de la base de datos propuesta anteriormente.</em></p>
 <h3 id="16-flujo-de-datos">1.6 Flujo de datos</h3>
 <ol>
 <li>El usuario accede al sitio web mediante navegador web.  </li>
