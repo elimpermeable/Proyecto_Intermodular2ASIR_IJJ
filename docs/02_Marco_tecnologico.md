@@ -38,7 +38,7 @@ El sistema se implementa sobre un **host Ubuntu Server**, que actúa como base p
   - Facilitan la realización de copias de seguridad completas del entorno.
 
 <p align="center">
-  <img src="images/docker.png" alt="Esquema de los contenedores y volúmenes Docker">
+  <img src="../images/docker.png" alt="Esquema de los contenedores y volúmenes Docker">
 </p>
 
 ### 1.4 Servicios en contenedores: WordPress y MySQL
