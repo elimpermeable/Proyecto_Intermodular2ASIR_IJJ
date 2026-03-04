@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # INFRAESTRUCTURA TI para Taller FHD
 
 ## Resumen
