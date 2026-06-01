@@ -1,3 +1,5 @@
+# Planificación
+
 ## 1. Planificación del proyecto
 
 La planificación del proyecto se ha organizado en función de un equipo de trabajo compuesto por tres integrantes.  
@@ -13,9 +15,9 @@ El equipo de trabajo se estructura en los siguientes roles principales:
 
 A cada rol se le asigna un integrante del equipo:
 
-- **Jesús**: responsable de la instalación, administración y mantenimiento tanto del host Ubuntu Server como de las redes y contenedores gestionados en Docker.  
-- **Jose Carlos**: responsable de la creación, mantenimiento y gestión de la base de datos, adaptada a las necesidades del taller.  
-- **Israel**: responsable del diseño de la página web y del firewall personalizado del servidor.  
+- **Jesús**: responsable de la instalación, administración y mantenimiento tanto del host Ubuntu Server 24.04 como de las redes, contenedores Docker, servidor DNS y sistema de copias de seguridad.
+- **Jose Carlos**: responsable de la creación, mantenimiento y gestión de la base de datos, adaptada a las necesidades del taller.
+- **Israel**: responsable del diseño de la página web y de la seguridad perimetral del servidor mediante Security Groups de AWS.
 - **Tutor del proyecto**: supervisión y validación de los entregables.
 
 ---
@@ -24,18 +26,20 @@ A cada rol se le asigna un integrante del equipo:
 
 #### Rol 1: Responsable de infraestructura y sistemas
 
-Este rol se encarga del diseño, implementación y mantenimiento de la infraestructura técnica del proyecto, incluyendo Ubuntu Server, Docker, sus contenedores y volúmenes.
+Este rol se encarga del diseño, implementación y mantenimiento de la infraestructura técnica del proyecto, incluyendo las tres instancias EC2, Docker, sus contenedores, volúmenes, el servidor DNS y el sistema de backups.
 
 **Funciones principales:**
 
-- Instalación y configuración del sistema operativo Ubuntu Server.
-- Instalación y configuración de Docker en el servidor.
-- Diseño de la arquitectura de contenedores.
-- Creación y gestión de redes Docker (red pública y red privada).
+- Instalación y configuración del sistema operativo Ubuntu Server 24.04 en las tres instancias EC2.
+- Asignación de Elastic IPs y configuración de Security Groups en AWS.
+- Instalación y configuración de Docker Engine + Docker Compose v2.
+- Diseño de la arquitectura de contenedores y red interna `taller_network`.
 - Configuración de volúmenes persistentes para contenedores.
-- Implementación de medidas básicas de seguridad del sistema.
-- Configuración del acceso remoto seguro mediante SSH.
-- Gestión de certificados SSL/TLS para habilitar HTTPS.
+- Implementación y configuración del servidor DNS con BIND9.
+- Creación de zonas DNS para los dominios del taller.
+- Implementación del sistema de copias de seguridad automáticas con `mysqldump`, `rsync` y `cron`.
+- Configuración del acceso remoto seguro mediante SSH con claves RSA.
+- Gestión de certificados SSL de Cloudflare para habilitar HTTPS.
 
 ---
 
@@ -45,24 +49,27 @@ Este rol se centra en la implantación y la gestión de la base de datos.
 
 **Funciones principales:**
 
-- Instalación y configuración del contenedor de MySQL.
-- Diseño y creación de la base de datos relacional.
-- Definición de tablas, claves primarias y claves foráneas.
+- Instalación y configuración del contenedor de MySQL 8.0.
+- Diseño y creación de las dos bases de datos: `wordpress` y `taller_motos`.
+- Definición de tablas, claves primarias y claves foráneas en español.
+- Creación del esquema relacional con 5 tablas: clientes, motos, reparaciones, mecánicos y lista de compra.
 - Integración de WordPress con la base de datos MySQL.
-- Verificación del correcto acceso a la base de datos desde la aplicación.
-- Gestión de usuarios y permisos dentro de la base de datos.
+- Integración de Laravel 12 con la base de datos `taller_motos` mediante Eloquent ORM.
+- Gestión de usuarios y permisos con privilegios mínimos (`wp_user` y `laravel_user`).
 
 ---
 
 #### Rol 3: Responsable de diseño de aplicación y seguridad
 
-Este rol se encarga del diseño de la página WordPress y de la seguridad a nivel de internet del host.
+Este rol se encarga del diseño de la página WordPress, del panel de administración Laravel/Filament y de la seguridad perimetral del servidor.
 
 **Funciones principales:**
 
-- Diseño de la página web a nivel de frontend y backend.
-- Verificación del correcto acceso a WordPress desde la web.
-- Uso adecuado de nftables para minimizar la exposición de puertos no deseados en el servidor.
+- Diseño de la página web WordPress a nivel de frontend y backend.
+- Instalación y configuración de Laravel 12 + Filament v3 como panel de administración privado.
+- Creación de los módulos de gestión: Clientes, Motos, Reparaciones, Mecánicos y Lista de Compra.
+- Verificación del correcto acceso a WordPress y al panel desde la web.
+- Configuración de Security Groups de AWS para minimizar la exposición de puertos no deseados.
 
 ---
 
@@ -76,22 +83,32 @@ El desarrollo del proyecto se divide en las siguientes fases:
 - Análisis de requisitos funcionales y no funcionales.
 
 #### Fase 2: Diseño técnico
-- Diseño de la arquitectura del sistema.
-- Diseño de la infraestructura basada en contenedores.
+- Diseño de la arquitectura del sistema con tres instancias EC2.
+- Diseño de la infraestructura basada en contenedores Docker.
 - Diseño del modelo de datos y del diagrama entidad–relación.
+- Selección de dominios y planificación del servidor DNS.
 
 #### Fase 3: Implementación
-- Despliegue del servidor Ubuntu.
-- Configuración de Docker, redes y volúmenes.
+- Despliegue de las tres instancias EC2 en AWS.
+- Configuración de Docker, redes y volúmenes en el servidor principal.
 - Implantación de WordPress y MySQL.
-- Configuración de seguridad y HTTPS.
+- Instalación y configuración de Laravel 12 + Filament v3.
+- Configuración del servidor DNS con BIND9.
+- Implementación del sistema de backups automáticos nocturnos.
 
-#### Fase 4: Pruebas y validación
-- Pruebas de funcionamiento de la aplicación.
-- Validación del acceso a la base de datos.
-- Revisión de seguridad básica del sistema.
+#### Fase 4: Seguridad y HTTPS
+- Configuración de Security Groups específicos para cada instancia.
+- Implementación de HTTPS con certificados Cloudflare Origin.
+- Configuración de Nginx para redirección HTTP → HTTPS.
+- Configuración del DNS privado para restringir el acceso al panel de Laravel.
 
-#### Fase 5: Documentación y entrega
+#### Fase 5: Pruebas y validación
+- Pruebas de funcionamiento de WordPress y Laravel/Filament.
+- Validación del acceso a las bases de datos.
+- Verificación del servidor DNS desde distintos escenarios de red.
+- Comprobación del sistema de backups automáticos.
+
+#### Fase 6: Documentación y entrega
 - Redacción final de la documentación.
 - Publicación en GitHub Pages.
 - Preparación de la entrega final del proyecto.
