@@ -6,43 +6,71 @@ En esta fase se ha llevado a cabo el despliegue completo de la infraestructura n
 
 ## 1. Infraestructura en AWS
 
-Se ha desplegado una instancia **EC2** en la región `us-east-1` con **Ubuntu Server 22.04 LTS**, asociada a una **Elastic IP** para disponer de dirección pública fija.
+Se han desplegado **tres instancias EC2** en la región `us-east-1` con **Ubuntu Server 24.04 LTS**, cada una con una **Elastic IP** fija asociada.
+
+| Instancia | IP | Tipo | Función |
+|-----------|-----|------|---------|
+| taller-fhd-principal | 3.217.215.112 | t3.medium | Servidor web, panel admin y base de datos |
+| taller-fhd-dns | 18.213.221.53 | t3.micro | Servidor DNS con BIND9 |
+| taller-fhd-backups | 54.165.242.48 | t3.micro | Servidor de copias de seguridad |
+
 
 ### Security Groups
 
-Se configuró un *Security Group* específico con las siguientes reglas de entrada:
+Cada instancia dispone de su propio Security Group con únicamente los puertos necesarios:
 
-| Puerto | Protocolo | Origen    | Uso                                      |
-|--------|-----------|-----------|------------------------------------------|
-| 22     | TCP       | IP propia | Administración remota por SSH            |
-| 80     | TCP       | 0.0.0.0/0 | Web pública WordPress                    |
-| 8081   | TCP       | 0.0.0.0/0 | Panel de administración Laravel/Filament |
+**Servidor principal:**
 
-El puerto **3306 (MySQL) no está expuesto** en ningún momento, garantizando que la base de datos solo sea accesible desde la red interna de Docker.
+| Puerto | Protocolo | Origen    | Uso                           |
+|--------|-----------|-----------|-------------------------------|
+| 22     | TCP       | IP propia | Administración remota por SSH |
+| 80     | TCP       | 0.0.0.0/0 | Redirección HTTP → HTTPS      |
+| 443    | TCP       | 0.0.0.0/0 | Web pública WordPress (HTTPS) |
+| 8081   | TCP       | 0.0.0.0/0 | Panel admin Laravel (HTTPS)   |
 
-![Reglas del Security Group en AWS](images/securitygroups.png)
+El puerto **3306 (MySQL) no está expuesto** en ningún momento.
+
+
+**Servidor DNS:**
+
+| Puerto | Protocolo | Origen    | Uso           |
+|--------|-----------|-----------|---------------|
+| 22     | TCP       | IP propia | SSH           |
+| 53     | UDP       | 0.0.0.0/0 | Consultas DNS |
+| 53     | TCP       | 0.0.0.0/0 | Consultas DNS |
+
+
+**Servidor de backups:**
+
+| Puerto | Protocolo | Origen           | Uso                            |
+|--------|-----------|------------------|--------------------------------|
+| 22     | TCP       | IP propia        | SSH administrador              |
+| 22     | TCP       | 3.217.215.112/32 | Recepción de backups por rsync |
+
 
 ---
 
 ## 2. Estructura del proyecto
 
-Todos los archivos de configuración se organizan bajo `/opt/taller`:
+Todos los archivos de configuración se organizan bajo `/opt/taller` en el servidor principal:
 
 ```
 /opt/taller/
 ├── docker-compose.yml          # Orquestador principal
 ├── .env                        # Credenciales y variables (nunca en Git)
+├── backup.sh                   # Script de backup automático nocturno
 ├── nginx/
-│   └── conf.d/
-│       └── default.conf        # Configuración del reverse proxy
+│   ├── conf.d/
+│   │   └── default.conf        # Configuración del reverse proxy y HTTPS
+│   └── certs/
+│       ├── certpub.pem         # Certificado SSL público (Cloudflare)
+│       └── certpriv.key        # Clave privada SSL (Cloudflare)
 ├── mysql/
 │   └── init/
-│       └── 01_init.sql         # Inicialización de BBD y tablas
+│       └── 01_init.sql         # Inicialización de BBD, usuarios y tablas
 └── laravel/
     └── Dockerfile              # Imagen personalizada PHP 8.2
 ```
-
-Los datos de las aplicaciones se almacenan en **volúmenes Docker gestionados**, fuera del directorio del proyecto, garantizando su persistencia ante reinicios.
 
 ---
 
@@ -57,10 +85,12 @@ services:
     image: nginx:alpine
     ports:
       - "80:80"
+      - "443:443"
       - "8081:8081"
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      - wordpress_files:/var/www/html/wordpress:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+      - wordpress_files:/var/www/html:ro
       - laravel_app:/var/www/panel:ro
 
   wordpress:
@@ -115,15 +145,22 @@ Todas las credenciales se cargan desde el fichero `.env`, que nunca se sube al r
 
 ---
 
-## 4. Nginx como Reverse Proxy
+## 4. Nginx como Reverse Proxy con HTTPS
 
-Nginx actúa como único punto de entrada desde el exterior y enruta el tráfico según el puerto de la petición: el puerto **80** hacia WordPress y el puerto **8081** hacia el panel de administración Laravel/Filament. Ningún otro contenedor tiene puertos expuestos directamente al exterior.
+Nginx actúa como único punto de entrada desde el exterior. Enruta el tráfico según el **dominio** de la petición y fuerza HTTPS en todos los accesos mediante redirección 301:
+
+- `fhdproyects.innc.link` → WordPress (web pública)
+- `tallerfhd.gestiona` → Laravel + Filament (panel admin, solo DNS privado)
+
+Los certificados SSL son **Cloudflare Origin Certificates** para `*.innc.link`, almacenados en `/opt/taller/nginx/certs/`.
 
 ---
 
 ## 5. Imagen personalizada de Laravel
 
-Dado que Laravel y Filament requieren extensiones PHP adicionales, se creó una imagen personalizada a partir de `php:8.2-fpm-alpine` que incluye todas las dependencias necesarias, entre ellas `pdo_mysql`, `intl`, `gd` y `zip`, además de **Composer** para la gestión de paquetes.
+Dado que Laravel 12 y Filament v3 requieren extensiones PHP adicionales, se creó una imagen personalizada a partir de `php:8.2-fpm-alpine` que incluye todas las dependencias necesarias, entre ellas `pdo_mysql`, `intl`, `gd` y `zip`, además de **Composer** para la gestión de paquetes.
+
+La extensión `intl` requiere la dependencia del sistema `icu-dev`, que debe instalarse explícitamente antes de compilarla.
 
 ---
 
@@ -132,43 +169,94 @@ Dado que Laravel y Filament requieren extensiones PHP adicionales, se creó una 
 MySQL gestiona **dos bases de datos separadas** dentro del mismo contenedor:
 
 - `wordpress` — datos del CMS, accedida por el usuario `wp_user`.
-- `taller_motos` — datos del negocio (clientes, motos, reparaciones, mecánicos), accedida por el usuario `laravel_user`.
+- `taller_motos` — datos del negocio, accedida por el usuario `laravel_user`.
 
-Cada usuario tiene **privilegios mínimos** sobre su propia base de datos únicamente. El script de inicialización crea automáticamente las tablas y carga datos de ejemplo al primer arranque.
+La base de datos `taller_motos` contiene **cinco tablas** diseñadas completamente en español:
+
+| Tabla | Descripción |
+|-------|-------------|
+| `clientes` | Nombre, apellidos, teléfono y email |
+| `motos` | Matrícula, marca, modelo y cliente propietario |
+| `reparaciones` | Motivo, solución, estado, fechas, km y precio |
+| `mecanicos` | Nombre, apellidos, teléfono y estado activo |
+| `lista_compra` | Material, cantidad, urgente y comprado |
+
+Las relaciones entre tablas son: un cliente puede tener varias motos, y una moto puede tener varias reparaciones. Cada reparación tiene un mecánico asignado.
 
 ---
 
-## 7. Panel de administración Laravel + Filament
+## 7. Panel de administración Laravel 12 + Filament v3
 
-Tras el despliegue de los contenedores se instaló **Laravel 11** y **Filament v3** dentro del contenedor, generando los módulos de gestión del taller:
+Tras el despliegue de los contenedores se instaló **Laravel 12** y **Filament v3** dentro del contenedor, generando cinco módulos de gestión del taller:
 
 - **Clientes** — registro y búsqueda de clientes.
 - **Motos** — vehículos vinculados a cada cliente.
-- **Reparaciones** — historial de trabajos con estado, fechas y costes.
-- **Mecánicos** — personal del taller.
+- **Reparaciones** — historial de trabajos con estado, fechas y precios.
+- **Mecánicos** — personal del taller con estado activo/inactivo.
+- **Lista de compra** — materiales pendientes de adquirir, con prioridad urgente.
 
-El panel es accesible en `http://IP:8081/admin` con autenticación propia.
+El panel es accesible en `https://tallerfhd.gestiona/admin` **únicamente desde equipos que tengan configurado el DNS privado**.
 
 ---
 
-## 8. Verificación del sistema
+## 8. Servidor DNS con BIND9
+
+Se desplegó una segunda instancia EC2 (`18.213.221.53`) con **BIND9** para proporcionar resolución de nombres propia e independiente de Cloudflare.
+
+Se configuraron tres zonas DNS:
+
+- `fhdproyects.innc.link` → `3.217.215.112`
+- `fhdproyects-gestiona.innc.link` → `3.217.215.112`
+- `tallerfhd.gestiona` → `3.217.215.112` (dominio inventado, solo existe en este DNS)
+
+El portátil del administrador se configuró en `/etc/systemd/resolved.conf` para usar `18.213.221.53` como DNS primario, con `1.1.1.1` como fallback. Esto permite:
+
+- Acceder a `tallerfhd.gestiona` desde el portátil aunque Cloudflare esté bloqueado.
+- Demostrar resolución DNS propia en el entorno del centro educativo.
+- Mantener la accesibilidad pública del dominio WordPress desde cualquier dispositivo.
+
+---
+
+## 9. Sistema de copias de seguridad automáticas
+
+Se desplegó una tercera instancia EC2 (`54.165.242.48`) dedicada exclusivamente a recibir copias de seguridad.
+
+Se configuró una **conexión SSH sin contraseña** entre el servidor principal y el servidor de backups mediante una clave RSA dedicada generada en el servidor principal.
+
+El script `/opt/taller/backup.sh` realiza automáticamente cada noche a las **2:00 AM** (programado con `cron`):
+
+1. Volcado de la base de datos `wordpress` con `mysqldump`
+2. Volcado de la base de datos `taller_motos` con `mysqldump`
+3. Compresión de los archivos WordPress con `tar`
+4. Compresión de la configuración `/opt/taller` con `tar`
+5. Envío de todos los archivos al servidor de backups mediante `rsync` sobre SSH
+6. Limpieza de archivos temporales locales
+
+Cada backup incluye **fecha y hora** en el nombre del archivo. Los resultados quedan registrados en `/var/log/backup.log`.
+
+---
+
+## 10. Verificación del sistema
 
 Una vez completado el despliegue se verificó el correcto funcionamiento de todos los servicios:
 
 | URL | Resultado |
 |-----|-----------|
-| `http://IP/` | Web pública WordPress ✅ |
-| `http://IP/wp-admin` | Panel WordPress ✅ |
-| `http://IP:8081/admin` | Login Filament ✅ |
-| `http://IP:8081/admin/clientes` | Listado de clientes ✅ |
-| `http://IP:8081/admin/motos` | Listado de motos ✅ |
-| `http://IP:8081/admin/reparaciones` | Listado de reparaciones ✅ |
-| `http://IP:8081/admin/mecanicos` | Listado de mecánicos ✅ |
+| `https://fhdproyects.innc.link` | Web pública WordPress ✅ |
+| `https://fhdproyects.innc.link/wp-admin` | Panel WordPress ✅ |
+| `https://tallerfhd.gestiona/admin` | Login Filament ✅ |
+| `https://tallerfhd.gestiona/admin/clientes` | Listado de clientes ✅ |
+| `https://tallerfhd.gestiona/admin/motos` | Listado de motos ✅ |
+| `https://tallerfhd.gestiona/admin/reparaciones` | Listado de reparaciones ✅ |
+| `https://tallerfhd.gestiona/admin/mecanicos` | Listado de mecánicos ✅ |
+| `https://tallerfhd.gestiona/admin/lista-compras` | Lista de compra ✅ |
+| `dig @18.213.221.53 tallerfhd.gestiona` | Resuelve 3.217.215.112 ✅ |
+| Backup nocturno en servidor independiente | Ejecutado correctamente ✅ |
 
 Se comprobó también que los datos persisten tras reiniciar los contenedores y que MySQL **no es accesible desde el exterior** gracias al Security Group y a la red interna de Docker.
 
 ---
 
-## 9. Conclusiones de la fase de desarrollo
+## 11. Conclusiones de la fase de desarrollo
 
-El uso combinado de **AWS EC2**, **Elastic IP**, **Security Groups** y **Docker Compose** ha permitido desplegar una infraestructura modular, segura y reproducible en la que cada servicio corre de forma aislada y puede ser mantenido o actualizado de forma independiente. El proyecto está preparado para una migración a producción real añadiendo únicamente un dominio propio y certificados SSL con Let's Encrypt.
+El uso combinado de **AWS EC2**, **Elastic IP**, **Security Groups**, **Docker Compose**, **BIND9** y un sistema de backups automáticos ha permitido desplegar una infraestructura modular, segura y reproducible en la que cada servicio corre de forma aislada y puede ser mantenido o actualizado de forma independiente. La separación en tres instancias garantiza que un fallo en un servidor no afecte al resto del sistema.
