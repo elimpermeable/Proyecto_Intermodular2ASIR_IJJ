@@ -462,10 +462,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#justificacion-de-la-plataforma-de-virtualizacion" class="md-nav__link">
+  <a href="#justificacion-de-la-plataforma-de-contenedores" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Justificación de la plataforma de virtualización
+        Justificación de la plataforma de contenedores
       
     </span>
   </a>
@@ -985,10 +985,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#justificacion-de-la-plataforma-de-virtualizacion" class="md-nav__link">
+  <a href="#justificacion-de-la-plataforma-de-contenedores" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Justificación de la plataforma de virtualización
+        Justificación de la plataforma de contenedores
       
     </span>
   </a>
@@ -1168,10 +1168,10 @@
 
 <h1 id="introduccion">Introducción</h1>
 <h3 id="titulo-del-reto"><strong>Título del reto</strong></h3>
-<p><strong>Despliegue inicial de un sitio web corporativo para un taller de personalización y restauración de motocicletas</strong></p>
+<p><strong>Despliegue de infraestructura web completa para un taller de personalización y restauración de motocicletas</strong></p>
 <hr />
 <h2 id="1-contexto-de-la-empresa-organizacion">1. Contexto de la empresa / organización</h2>
-<p>El proyecto se plantea para un taller de reciente apertura situado en Crevillente, especializado en la restauración completa de motocicletas, fabricación de piezas personalizadas y mantenimiento general. Actualmente, el taller no cuenta con presencia digital, lo que dificulta que los potenciales clientes conozcan sus servicios, su ubicación y trabajos realizados. Debido a su reciente actividad, el taller busca mejorar su visibilidad y generar un canal de contacto accesible.</p>
+<p>El proyecto se plantea para un taller de reciente apertura situado en Crevillente, especializado en la restauración completa de motocicletas, fabricación de piezas personalizadas y mantenimiento general. Actualmente, el taller no cuenta con presencia digital, lo que dificulta que los potenciales clientes conozcan sus servicios, su ubicación y trabajos realizados. Debido a su reciente actividad, el taller busca mejorar su visibilidad y generar un canal de contacto accesible, así como disponer de herramientas internas para la gestión de su actividad diaria.</p>
 <hr />
 <h2 id="2-problematica-identificada">2. Problemática identificada</h2>
 <p>Actualmente, el taller presenta las siguientes limitaciones:</p>
@@ -1180,19 +1180,20 @@
 <li>No existe un repositorio público de sus trabajos para mostrar calidad y experiencia.</li>
 <li>La comunicación con el cliente se realiza únicamente a nivel presencial o mediante mensajería móvil.</li>
 <li>No hay un punto de referencia donde consultar ubicación, horarios o servicios.</li>
+<li>No dispone de ningún sistema de gestión interna de clientes, motos o reparaciones.</li>
 </ul>
 <p>Esta situación reduce su alcance comercial y limita la captación de nuevos clientes, especialmente aquellos que buscan referencias previas antes de contratar un servicio.</p>
 <hr />
 <h2 id="3-objetivos-del-proyecto">3. Objetivos del proyecto</h2>
 <h3 id="31-objetivo-general">3.1 Objetivo general</h3>
-<p>Plantear el despliegue de una solución web alojada en un servidor propio que muestre información relevante del taller y sirva como base para futuras ampliaciones.</p>
+<p>Desplegar una infraestructura completa, segura y escalable en la nube que proporcione al taller una presencia digital pública y un sistema privado de gestión interna, garantizando la disponibilidad, seguridad y continuidad del servicio.</p>
 <h3 id="32-objetivos-especificos">3.2 Objetivos específicos</h3>
 <ul>
-<li>Definir la estructura base del sitio web y sus contenidos informativos.</li>
-<li>Proponer el uso de un servidor Ubuntu con servicios ejecutados mediante contenedores Docker.</li>
-<li>Documentar el proceso de implantación, configuraciones, decisiones y estructura del repositorio.</li>
-<li>Publicar la documentación del proyecto y avances en GitHub Pages.</li>
-<li>Sentar la base para futuras mejoras funcionales.</li>
+<li>Desplegar una página web pública mediante WordPress accesible con dominio propio y HTTPS.</li>
+<li>Implementar un panel de administración privado con Laravel y Filament para la gestión de clientes, motos, reparaciones y mecánicos.</li>
+<li>Configurar un servidor DNS propio con BIND9 para resolución de nombres tanto en red pública como en entornos con acceso restringido a internet.</li>
+<li>Implementar un sistema de copias de seguridad automáticas nocturnas en un servidor independiente.</li>
+<li>Documentar el proceso completo de implantación y publicarlo en GitHub Pages.</li>
 </ul>
 <hr />
 <h2 id="4-identificacion-y-clasificacion-de-interesados">4. Identificación y clasificación de interesados</h2>
@@ -1209,7 +1210,7 @@
 <tr>
 <td>Propietario del taller</td>
 <td>Cliente principal</td>
-<td>Captar clientes y presentar trabajos realizados</td>
+<td>Captar clientes y gestionar el taller digitalmente</td>
 <td>Alto</td>
 </tr>
 <tr>
@@ -1219,8 +1220,14 @@
 <td>Medio</td>
 </tr>
 <tr>
-<td>Alumno desarrollador</td>
-<td>Responsable del proyecto</td>
+<td>Mecánicos del taller</td>
+<td>Usuario interno</td>
+<td>Gestionar reparaciones desde el panel admin</td>
+<td>Medio</td>
+</tr>
+<tr>
+<td>Alumnos desarrolladores</td>
+<td>Responsables del proyecto</td>
 <td>Desarrollo y documentación técnica</td>
 <td>Alto</td>
 </tr>
@@ -1250,7 +1257,7 @@
 <tbody>
 <tr>
 <td>Alta influencia – Alto interés</td>
-<td>Propietario del taller, Alumno desarrollador, Tutor</td>
+<td>Propietario del taller, Alumnos desarrolladores, Tutor</td>
 </tr>
 <tr>
 <td>Alta influencia – Bajo interés</td>
@@ -1258,7 +1265,7 @@
 </tr>
 <tr>
 <td>Baja influencia – Alto interés</td>
-<td>Clientes futuros</td>
+<td>Clientes futuros, Mecánicos</td>
 </tr>
 <tr>
 <td>Baja influencia – Bajo interés</td>
@@ -1272,32 +1279,34 @@
 <hr />
 <h2 id="5-alcance-del-proyecto">5. Alcance del proyecto</h2>
 <h3 id="51-alcance-funcional">5.1 Alcance funcional</h3>
-<p>El proyecto consiste en el diseño, implementación y configuración de una <strong>infraestructura de servidor web</strong> destinada a alojar una plataforma web informativa para un taller especializado en restauración y personalización de motocicletas. El objetivo principal es proporcionar una solución estable, segura y fácilmente recuperable ante fallos, priorizando la administración de sistemas frente al desarrollo de la aplicación.</p>
+<p>El proyecto consiste en el diseño, implementación y configuración de una <strong>infraestructura de servidor completa</strong> en la nube, compuesta por tres instancias independientes que dan servicio a una plataforma web pública, un panel de gestión privado y un sistema de backups automáticos. El objetivo principal es proporcionar una solución estable, segura y fácilmente recuperable ante fallos, priorizando la administración de sistemas frente al desarrollo de la aplicación.</p>
 <p>Se incluye dentro del alcance del proyecto:</p>
 <ul>
-<li>Despliegue de una página web informativa mediante WordPress.</li>
-<li>Publicación de servicios ofrecidos y proyectos realizados.</li>
-<li>Implementación de una galería de imágenes.</li>
-<li>Inclusión de información de contacto y localización.</li>
-<li>Gestión básica de contenidos mediante el panel de administración de WordPress.</li>
+<li>Despliegue de una página web informativa mediante WordPress con dominio propio y HTTPS.</li>
+<li>Panel de administración privado con Laravel + Filament para gestión de clientes, motos, reparaciones y mecánicos.</li>
+<li>Lista de compra interna para gestión de materiales del taller.</li>
+<li>Servidor DNS propio con BIND9 que resuelve los dominios del taller de forma independiente a Cloudflare.</li>
+<li>Sistema de copias de seguridad automáticas nocturnas con rsync hacia un servidor independiente.</li>
 <li>Publicación de la documentación técnica del proyecto a través de GitHub Pages.</li>
-<li>Configuración de mecanismos de seguridad y copias de seguridad a nivel de servidor.</li>
-<li>Infraestructura preparada para futuras ampliaciones.</li>
 </ul>
 <hr />
 <h3 id="52-alcance-tecnico">5.2 Alcance técnico</h3>
 <p>El proyecto se basa en tecnologías de <strong>código abierto</strong>, alineadas con los contenidos del ciclo formativo de <strong>Administración de Sistemas Informáticos en Red (ASIR)</strong> y ampliamente utilizadas en entornos profesionales.</p>
 <p>Las tecnologías y plataformas seleccionadas son:</p>
 <ul>
-<li><strong>Sistema operativo:</strong> Ubuntu Server  </li>
-<li><strong>Plataforma de virtualización/contenedores:</strong> Docker  </li>
-<li><strong>Servidor web:</strong> Apache  </li>
-<li><strong>CMS:</strong> WordPress  </li>
-<li><strong>Sistema gestor de bases de datos:</strong> MySQL  </li>
-<li><strong>Control de versiones:</strong> Git y GitHub  </li>
-<li><strong>Documentación técnica:</strong> GitHub Pages  </li>
+<li><strong>Sistema operativo:</strong> Ubuntu Server 24.04 LTS</li>
+<li><strong>Plataforma de contenedores:</strong> Docker + Docker Compose v2</li>
+<li><strong>Servidor web / Reverse proxy:</strong> Nginx</li>
+<li><strong>CMS:</strong> WordPress</li>
+<li><strong>Framework backend:</strong> Laravel 12 + Filament v3</li>
+<li><strong>Sistema gestor de bases de datos:</strong> MySQL 8.0</li>
+<li><strong>Servidor DNS:</strong> BIND9</li>
+<li><strong>Infraestructura cloud:</strong> AWS EC2 + Elastic IP</li>
+<li><strong>Certificados SSL:</strong> Cloudflare Origin Certificates</li>
+<li><strong>Control de versiones:</strong> Git y GitHub</li>
+<li><strong>Documentación técnica:</strong> GitHub Pages</li>
 </ul>
-<h4 id="justificacion-de-la-plataforma-de-virtualizacion">Justificación de la plataforma de virtualización</h4>
+<h4 id="justificacion-de-la-plataforma-de-contenedores">Justificación de la plataforma de contenedores</h4>
 <p>Se ha seleccionado Docker como entorno de virtualización por los siguientes motivos:</p>
 <ul>
 <li>Permite el aislamiento de servicios mediante contenedores independientes.</li>
@@ -1308,102 +1317,119 @@
 </ul>
 <hr />
 <h3 id="53-presupuesto-estimado">5.3 Presupuesto estimado</h3>
-<p>El proyecto se desarrolla utilizando software libre y servicios gratuitos, no obstante puede estar sujeto a pagos necesarios ( validación de certificados, dominio, Sobrecostes por IP PÚBLICA):</p>
+<p>El proyecto se desarrolla utilizando software libre y servicios en capa gratuita de AWS, no obstante puede estar sujeto a costes en un entorno de producción real:</p>
 <ul>
-<li>Ubuntu Server, Docker, Apache, MySQL y WordPress.</li>
-<li>GitHub y GitHub Pages para control de versiones y documentación.</li>
+<li>Ubuntu Server, Docker, Nginx, MySQL, WordPress, Laravel y BIND9 son software libre y gratuito.</li>
+<li>GitHub y GitHub Pages para control de versiones y documentación son gratuitos.</li>
+<li>Las instancias EC2 <code>t3.micro</code> están dentro de la capa gratuita de AWS durante el primer año.</li>
+<li>Las Elastic IPs son gratuitas mientras estén asociadas a instancias en funcionamiento.</li>
 </ul>
-<p>El coste económico del proyecto es <strong>nulo</strong>, limitándose al uso del equipo personal del alumno y conexión a internet.<br />
-El coste de un despliegue real simultaneo a el proyecto, si que conllevaria los costes adicionales mencionados anteriormente.</p>
+<p>El coste del proyecto en su fase de desarrollo es <strong>prácticamente nulo</strong>, limitándose al uso del equipo personal del alumno y conexión a internet. Un despliegue en producción real conllevaría costes de dominio, instancias EC2 y almacenamiento adicional.</p>
 <hr />
 <h2 id="6-requisitos-del-sistema">6. Requisitos del sistema</h2>
 <h3 id="61-requisitos-funcionales-rf">6.1 Requisitos funcionales (RF)</h3>
 <ul>
 <li><strong>RF-001:</strong> El sistema debe permitir la gestión de contenidos informativos mediante un CMS.</li>
-<li><strong>RF-002:</strong> El sistema debe permitir la visualización estructurada de servicios y proyectos.</li>
-<li><strong>RF-003:</strong> El sistema debe disponer de un panel básico de administración del contenido.</li>
+<li><strong>RF-002:</strong> El sistema debe permitir la visualización estructurada de servicios y proyectos del taller.</li>
+<li><strong>RF-003:</strong> El sistema debe disponer de un panel de administración privado para la gestión interna del taller.</li>
+<li><strong>RF-004:</strong> El sistema debe permitir gestionar clientes, motos, reparaciones y mecánicos desde el panel.</li>
+<li><strong>RF-005:</strong> El sistema debe disponer de un servidor DNS propio capaz de resolver los dominios del taller.</li>
+<li><strong>RF-006:</strong> El sistema debe realizar copias de seguridad automáticas de las bases de datos y archivos críticos.</li>
 </ul>
 <hr />
 <h3 id="62-requisitos-no-funcionales-rnf">6.2 Requisitos no funcionales (RNF)</h3>
 <ul>
 <li><strong>RNF-001:</strong> El sistema debe garantizar un tiempo de carga adecuado para el acceso web.</li>
 <li><strong>RNF-002:</strong> El sitio web debe ser accesible desde distintos dispositivos (diseño responsive).</li>
-<li><strong>RNF-003:</strong> El sistema debe disponer de <strong>copias de seguridad completas a nivel de servidor</strong>, que permitan la recuperación ante fallos físicos o lógicos.</li>
-<li><strong>RNF-004:</strong> El sistema debe garantizar comunicaciones seguras mediante el uso de <strong>HTTPS</strong>.</li>
+<li><strong>RNF-003:</strong> El sistema debe disponer de <strong>copias de seguridad automáticas nocturnas</strong> enviadas a un servidor independiente, que permitan la recuperación ante fallos físicos o lógicos.</li>
+<li><strong>RNF-004:</strong> El sistema debe garantizar comunicaciones seguras mediante el uso de <strong>HTTPS</strong> con certificados válidos.</li>
+<li><strong>RNF-005:</strong> El panel de administración debe ser accesible únicamente desde equipos configurados con el DNS privado del taller.</li>
 </ul>
 <hr />
 <h3 id="63-requisitos-de-negocio-rn">6.3 Requisitos de negocio (RN)</h3>
 <ul>
 <li><strong>RN-001:</strong> Mejorar la visibilidad online del taller y su presencia digital.</li>
+<li><strong>RN-002:</strong> Proporcionar al taller una herramienta de gestión interna accesible y sencilla de usar.</li>
 </ul>
 <hr />
 <h2 id="7-alcance-temporal">7. Alcance temporal</h2>
 <p>El proyecto se desarrollará en las siguientes fases:</p>
 <ol>
 <li>
-<p><strong>Planificación y análisis</strong><br />
-   Definición del contexto, objetivos y requisitos del sistema.<br />
+<p><strong>Planificación y análisis</strong>
+   Definición del contexto, objetivos y requisitos del sistema.
    Entregable: documentación inicial del proyecto.</p>
 </li>
 <li>
-<p><strong>Implementación del entorno de sistemas</strong><br />
-   Instalación y configuración de Ubuntu Server, despliegue del entorno Docker y configuración de Apache, MySQL y WordPress.<br />
-   Entregable: entorno servidor operativo.</p>
+<p><strong>Implementación del entorno de sistemas</strong>
+   Despliegue de las instancias EC2, configuración de Docker Compose, Nginx, WordPress, Laravel + Filament y MySQL.
+   Entregable: entorno servidor operativo con panel de gestión funcional.</p>
 </li>
 <li>
-<p><strong>Seguridad, copias de seguridad y documentación</strong><br />
-   Aplicación de medidas de seguridad, configuración de HTTPS, copias de seguridad y publicación de la documentación técnica.<br />
+<p><strong>Servicios avanzados</strong>
+   Configuración del servidor DNS con BIND9, implementación de HTTPS con certificados Cloudflare y despliegue del servidor de backups automáticos.
+   Entregable: infraestructura completa con DNS, HTTPS y copias de seguridad.</p>
+</li>
+<li>
+<p><strong>Seguridad y documentación</strong>
+   Revisión de seguridad, configuración de Security Groups, y publicación de la documentación técnica completa.
    Entregable: sistema validado y documentación final.</p>
 </li>
 </ol>
 <p>Los principales hitos del proyecto son:</p>
 <ul>
-<li><strong>Hito 1:</strong> servidor configurado con servicios funcionales.</li>
-<li><strong>Hito 2:</strong> sistema seguro, documentado y listo para entrega.</li>
+<li><strong>Hito 1:</strong> servidor principal configurado con WordPress y panel Laravel/Filament funcionales.</li>
+<li><strong>Hito 2:</strong> servidor DNS operativo resolviendo los dominios del taller.</li>
+<li><strong>Hito 3:</strong> sistema de backups automáticos nocurnos funcionando.</li>
+<li><strong>Hito 4:</strong> sistema seguro, documentado y listo para entrega.</li>
 </ul>
 <hr />
 <h2 id="8-especificacion-de-requisitos-por-modulos">8. Especificación de requisitos por módulos</h2>
 <h3 id="81-asgbd-administracion-de-sistemas-gestores-de-bases-de-datos">8.1 ASGBD – Administración de Sistemas Gestores de Bases de Datos</h3>
 <ul>
-<li>Instalación y configuración del sistema gestor de bases de datos MySQL.</li>
-<li>Creación y gestión de la estructura de base de datos utilizada por WordPress.</li>
-<li>Configuración de usuarios y sus respectivos permisos.</li>
-<li>Inclusión de la base de datos en las copias de seguridad del servidor.</li>
+<li>Instalación y configuración del sistema gestor de bases de datos MySQL 8.0 en contenedor Docker.</li>
+<li>Creación de dos bases de datos separadas: <code>wordpress</code> para el CMS y <code>taller_motos</code> para la gestión interna.</li>
+<li>Diseño del esquema relacional de <code>taller_motos</code> con 5 tablas: clientes, motos, reparaciones, mecánicos y lista de compra.</li>
+<li>Configuración de usuarios con privilegios mínimos (<code>wp_user</code> y <code>laravel_user</code>).</li>
+<li>Inclusión de ambas bases de datos en el sistema de copias de seguridad automáticas.</li>
 </ul>
 <hr />
 <h3 id="82-aso-administracion-de-sistemas-operativos">8.2 ASO – Administración de Sistemas Operativos</h3>
 <ul>
-<li>Instalación y configuración de Ubuntu Server en entorno Docker.</li>
+<li>Instalación y configuración de Ubuntu Server 24.04 en tres instancias EC2 independientes.</li>
 <li>Gestión de usuarios, permisos y políticas básicas de seguridad.</li>
-<li>Configuración y control de servicios del sistema (Apache y MySQL).</li>
-<li>Implementación de copias de seguridad completas del entorno.</li>
-<li>Conexión entre WordPress y la base de datos MySQL.</li>
+<li>Configuración y control de servicios del sistema mediante Docker Compose v2.</li>
+<li>Implementación de copias de seguridad automáticas nocturnas con <code>mysqldump</code> y <code>rsync</code>.</li>
+<li>Automatización mediante <code>cron</code> para la ejecución del script de backup a las 2:00 AM.</li>
 <li>Aislamiento de servicios mediante redes Docker personalizadas.</li>
 </ul>
 <hr />
 <h3 id="83-iaw-implantacion-de-aplicaciones-web">8.3 IAW – Implantación de Aplicaciones Web</h3>
 <ul>
-<li>Instalación y configuración del servidor web Apache.</li>
-<li>Instalación y configuración de WordPress.</li>
-<li>Administración de usuarios del CMS.</li>
-<li>Personalización básica de la aplicación web.</li>
+<li>Instalación y configuración del servidor web Nginx como reverse proxy.</li>
+<li>Instalación y configuración de WordPress como web pública del taller.</li>
+<li>Instalación y configuración de Laravel 12 + Filament v3 como panel de administración privado.</li>
+<li>Creación de modelos Eloquent y Resources de Filament para la gestión del taller.</li>
+<li>Administración de usuarios del CMS y del panel de administración.</li>
 </ul>
 <hr />
 <h3 id="84-servicios-de-red-e-internet">8.4 Servicios de Red e Internet</h3>
 <ul>
-<li>Configuración de acceso remoto seguro mediante SSH.</li>
-<li>Configuración de DNS básico o uso de DNS externo.</li>
-<li>Publicación del servicio web mediante Apache.</li>
-<li>Implementación de certificados SSL mediante <strong>Let’s Encrypt</strong>.</li>
+<li>Configuración de acceso remoto seguro mediante SSH con autenticación por clave pública.</li>
+<li>Despliegue y configuración de servidor DNS propio con <strong>BIND9</strong> en instancia EC2 independiente.</li>
+<li>Creación de zonas DNS para <code>fhdproyects.innc.link</code> y <code>tallerfhd.gestiona</code>.</li>
+<li>Publicación del servicio web mediante Nginx con HTTPS.</li>
+<li>Implementación de certificados SSL mediante <strong>Cloudflare Origin Certificates</strong>.</li>
 </ul>
 <hr />
 <h3 id="85-seguridad-y-alta-disponibilidad">8.5 Seguridad y Alta Disponibilidad</h3>
 <ul>
-<li>Configuración de firewall básico mediante ufw o reglas de red Docker.</li>
-<li>Implementación de certificados SSL mediante <strong>Let’s Encrypt</strong>.</li>
-<li>Configuración de Apache para forzar el uso de HTTPS.</li>
-<li>Análisis básico de amenazas y aplicación de medidas de protección.</li>
-<li>Protección frente a pérdida de datos mediante copias de seguridad a nivel de servidor.</li>
+<li>Configuración de <strong>Security Groups de AWS</strong> como firewall perimetral para las tres instancias.</li>
+<li>Implementación de certificados SSL con <strong>Cloudflare</strong> para comunicaciones HTTPS.</li>
+<li>Configuración de Nginx para forzar el uso de HTTPS mediante redirección 301.</li>
+<li>Análisis de amenazas y aplicación de medidas de protección (matriz de vulnerabilidades).</li>
+<li>Protección frente a pérdida de datos mediante copias de seguridad automáticas en servidor independiente.</li>
+<li>Aislamiento de MySQL: puerto 3306 nunca expuesto al exterior, solo accesible desde red interna Docker.</li>
 </ul>
 
 

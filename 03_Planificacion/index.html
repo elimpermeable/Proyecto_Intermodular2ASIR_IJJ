@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-planificacion-del-proyecto" class="md-skip">
+        <a href="#planificacion" class="md-skip">
           Skip to content
         </a>
       
@@ -327,6 +327,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -368,6 +370,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -495,10 +499,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fase-4-pruebas-y-validacion" class="md-nav__link">
+  <a href="#fase-4-seguridad-y-https" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fase 4: Pruebas y validación
+        Fase 4: Seguridad y HTTPS
       
     </span>
   </a>
@@ -506,10 +510,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fase-5-documentacion-y-entrega" class="md-nav__link">
+  <a href="#fase-5-pruebas-y-validacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fase 5: Documentación y entrega
+        Fase 5: Pruebas y validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-6-documentacion-y-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 6: Documentación y entrega
       
     </span>
   </a>
@@ -697,6 +712,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -823,10 +840,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fase-4-pruebas-y-validacion" class="md-nav__link">
+  <a href="#fase-4-seguridad-y-https" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fase 4: Pruebas y validación
+        Fase 4: Seguridad y HTTPS
       
     </span>
   </a>
@@ -834,10 +851,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fase-5-documentacion-y-entrega" class="md-nav__link">
+  <a href="#fase-5-pruebas-y-validacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fase 5: Documentación y entrega
+        Fase 5: Pruebas y validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-6-documentacion-y-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 6: Documentación y entrega
       
     </span>
   </a>
@@ -882,8 +910,7 @@
 
 
 
-  <h1>Planificación</h1>
-
+<h1 id="planificacion">Planificación</h1>
 <h2 id="1-planificacion-del-proyecto">1. Planificación del proyecto</h2>
 <p>La planificación del proyecto se ha organizado en función de un equipo de trabajo compuesto por tres integrantes.<br />
 Cada miembro asume un rol principal, aunque existe colaboración puntual entre roles para garantizar la coherencia y la correcta integración del proyecto.</p>
@@ -896,46 +923,51 @@ Cada miembro asume un rol principal, aunque existe colaboración puntual entre r
 </ul>
 <p>A cada rol se le asigna un integrante del equipo:</p>
 <ul>
-<li><strong>Jesús</strong>: responsable de la instalación, administración y mantenimiento tanto del host Ubuntu Server como de las redes y contenedores gestionados en Docker.  </li>
-<li><strong>Jose Carlos</strong>: responsable de la creación, mantenimiento y gestión de la base de datos, adaptada a las necesidades del taller.  </li>
-<li><strong>Israel</strong>: responsable del diseño de la página web y del firewall personalizado del servidor.  </li>
+<li><strong>Jesús</strong>: responsable de la instalación, administración y mantenimiento tanto del host Ubuntu Server 24.04 como de las redes, contenedores Docker, servidor DNS y sistema de copias de seguridad.</li>
+<li><strong>Jose Carlos</strong>: responsable de la creación, mantenimiento y gestión de la base de datos, adaptada a las necesidades del taller.</li>
+<li><strong>Israel</strong>: responsable del diseño de la página web y de la seguridad perimetral del servidor mediante Security Groups de AWS.</li>
 <li><strong>Tutor del proyecto</strong>: supervisión y validación de los entregables.</li>
 </ul>
 <hr />
 <h3 id="12-distribucion-de-roles-y-responsabilidades">1.2 Distribución de roles y responsabilidades</h3>
 <h4 id="rol-1-responsable-de-infraestructura-y-sistemas">Rol 1: Responsable de infraestructura y sistemas</h4>
-<p>Este rol se encarga del diseño, implementación y mantenimiento de la infraestructura técnica del proyecto, incluyendo Ubuntu Server, Docker, sus contenedores y volúmenes.</p>
+<p>Este rol se encarga del diseño, implementación y mantenimiento de la infraestructura técnica del proyecto, incluyendo las tres instancias EC2, Docker, sus contenedores, volúmenes, el servidor DNS y el sistema de backups.</p>
 <p><strong>Funciones principales:</strong></p>
 <ul>
-<li>Instalación y configuración del sistema operativo Ubuntu Server.</li>
-<li>Instalación y configuración de Docker en el servidor.</li>
-<li>Diseño de la arquitectura de contenedores.</li>
-<li>Creación y gestión de redes Docker (red pública y red privada).</li>
+<li>Instalación y configuración del sistema operativo Ubuntu Server 24.04 en las tres instancias EC2.</li>
+<li>Asignación de Elastic IPs y configuración de Security Groups en AWS.</li>
+<li>Instalación y configuración de Docker Engine + Docker Compose v2.</li>
+<li>Diseño de la arquitectura de contenedores y red interna <code>taller_network</code>.</li>
 <li>Configuración de volúmenes persistentes para contenedores.</li>
-<li>Implementación de medidas básicas de seguridad del sistema.</li>
-<li>Configuración del acceso remoto seguro mediante SSH.</li>
-<li>Gestión de certificados SSL/TLS para habilitar HTTPS.</li>
+<li>Implementación y configuración del servidor DNS con BIND9.</li>
+<li>Creación de zonas DNS para los dominios del taller.</li>
+<li>Implementación del sistema de copias de seguridad automáticas con <code>mysqldump</code>, <code>rsync</code> y <code>cron</code>.</li>
+<li>Configuración del acceso remoto seguro mediante SSH con claves RSA.</li>
+<li>Gestión de certificados SSL de Cloudflare para habilitar HTTPS.</li>
 </ul>
 <hr />
 <h4 id="rol-2-responsable-de-la-base-de-datos">Rol 2: Responsable de la base de datos</h4>
 <p>Este rol se centra en la implantación y la gestión de la base de datos.</p>
 <p><strong>Funciones principales:</strong></p>
 <ul>
-<li>Instalación y configuración del contenedor de MySQL.</li>
-<li>Diseño y creación de la base de datos relacional.</li>
-<li>Definición de tablas, claves primarias y claves foráneas.</li>
+<li>Instalación y configuración del contenedor de MySQL 8.0.</li>
+<li>Diseño y creación de las dos bases de datos: <code>wordpress</code> y <code>taller_motos</code>.</li>
+<li>Definición de tablas, claves primarias y claves foráneas en español.</li>
+<li>Creación del esquema relacional con 5 tablas: clientes, motos, reparaciones, mecánicos y lista de compra.</li>
 <li>Integración de WordPress con la base de datos MySQL.</li>
-<li>Verificación del correcto acceso a la base de datos desde la aplicación.</li>
-<li>Gestión de usuarios y permisos dentro de la base de datos.</li>
+<li>Integración de Laravel 12 con la base de datos <code>taller_motos</code> mediante Eloquent ORM.</li>
+<li>Gestión de usuarios y permisos con privilegios mínimos (<code>wp_user</code> y <code>laravel_user</code>).</li>
 </ul>
 <hr />
 <h4 id="rol-3-responsable-de-diseno-de-aplicacion-y-seguridad">Rol 3: Responsable de diseño de aplicación y seguridad</h4>
-<p>Este rol se encarga del diseño de la página WordPress y de la seguridad a nivel de internet del host.</p>
+<p>Este rol se encarga del diseño de la página WordPress, del panel de administración Laravel/Filament y de la seguridad perimetral del servidor.</p>
 <p><strong>Funciones principales:</strong></p>
 <ul>
-<li>Diseño de la página web a nivel de frontend y backend.</li>
-<li>Verificación del correcto acceso a WordPress desde la web.</li>
-<li>Uso adecuado de nftables para minimizar la exposición de puertos no deseados en el servidor.</li>
+<li>Diseño de la página web WordPress a nivel de frontend y backend.</li>
+<li>Instalación y configuración de Laravel 12 + Filament v3 como panel de administración privado.</li>
+<li>Creación de los módulos de gestión: Clientes, Motos, Reparaciones, Mecánicos y Lista de Compra.</li>
+<li>Verificación del correcto acceso a WordPress y al panel desde la web.</li>
+<li>Configuración de Security Groups de AWS para minimizar la exposición de puertos no deseados.</li>
 </ul>
 <hr />
 <h3 id="13-planificacion-por-fases">1.3 Planificación por fases</h3>
@@ -948,24 +980,35 @@ Cada miembro asume un rol principal, aunque existe colaboración puntual entre r
 </ul>
 <h4 id="fase-2-diseno-tecnico">Fase 2: Diseño técnico</h4>
 <ul>
-<li>Diseño de la arquitectura del sistema.</li>
-<li>Diseño de la infraestructura basada en contenedores.</li>
+<li>Diseño de la arquitectura del sistema con tres instancias EC2.</li>
+<li>Diseño de la infraestructura basada en contenedores Docker.</li>
 <li>Diseño del modelo de datos y del diagrama entidad–relación.</li>
+<li>Selección de dominios y planificación del servidor DNS.</li>
 </ul>
 <h4 id="fase-3-implementacion">Fase 3: Implementación</h4>
 <ul>
-<li>Despliegue del servidor Ubuntu.</li>
-<li>Configuración de Docker, redes y volúmenes.</li>
+<li>Despliegue de las tres instancias EC2 en AWS.</li>
+<li>Configuración de Docker, redes y volúmenes en el servidor principal.</li>
 <li>Implantación de WordPress y MySQL.</li>
-<li>Configuración de seguridad y HTTPS.</li>
+<li>Instalación y configuración de Laravel 12 + Filament v3.</li>
+<li>Configuración del servidor DNS con BIND9.</li>
+<li>Implementación del sistema de backups automáticos nocturnos.</li>
 </ul>
-<h4 id="fase-4-pruebas-y-validacion">Fase 4: Pruebas y validación</h4>
+<h4 id="fase-4-seguridad-y-https">Fase 4: Seguridad y HTTPS</h4>
 <ul>
-<li>Pruebas de funcionamiento de la aplicación.</li>
-<li>Validación del acceso a la base de datos.</li>
-<li>Revisión de seguridad básica del sistema.</li>
+<li>Configuración de Security Groups específicos para cada instancia.</li>
+<li>Implementación de HTTPS con certificados Cloudflare Origin.</li>
+<li>Configuración de Nginx para redirección HTTP → HTTPS.</li>
+<li>Configuración del DNS privado para restringir el acceso al panel de Laravel.</li>
 </ul>
-<h4 id="fase-5-documentacion-y-entrega">Fase 5: Documentación y entrega</h4>
+<h4 id="fase-5-pruebas-y-validacion">Fase 5: Pruebas y validación</h4>
+<ul>
+<li>Pruebas de funcionamiento de WordPress y Laravel/Filament.</li>
+<li>Validación del acceso a las bases de datos.</li>
+<li>Verificación del servidor DNS desde distintos escenarios de red.</li>
+<li>Comprobación del sistema de backups automáticos.</li>
+</ul>
+<h4 id="fase-6-documentacion-y-entrega">Fase 6: Documentación y entrega</h4>
 <ul>
 <li>Redacción final de la documentación.</li>
 <li>Publicación en GitHub Pages.</li>
