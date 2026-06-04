@@ -1270,7 +1270,6 @@
 <li><strong>Software:</strong> BIND9 en instancia EC2 independiente (<code>18.213.221.53</code>)</li>
 <li><strong>Zonas configuradas:</strong></li>
 <li><code>fhdproyects.innc.link</code> → <code>3.217.215.112</code> (mismo registro que Cloudflare)</li>
-<li><code>fhdproyects-gestiona.innc.link</code> → <code>3.217.215.112</code></li>
 <li><code>tallerfhd.gestiona</code> → <code>3.217.215.112</code> (dominio privado, solo existe en este DNS)</li>
 </ul>
 <p><strong>Funcionamiento según el escenario:</strong></p>
@@ -1338,11 +1337,13 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Características:</strong>
-- Cada backup incluye <strong>fecha y hora</strong> en el nombre del archivo para poder restaurar cualquier punto.
-- La conexión entre servidores se realiza mediante <strong>SSH sin contraseña</strong> con clave RSA dedicada.
-- Los resultados de cada ejecución quedan registrados en <code>/var/log/backup.log</code>.
-- El código Laravel no se incluye en el backup porque está en GitHub.</p>
+<p><strong>Características:</strong></p>
+<ul>
+<li>Cada backup incluye <strong>fecha y hora</strong> en el nombre del archivo para poder restaurar cualquier punto.</li>
+<li>La conexión entre servidores se realiza mediante <strong>SSH sin contraseña</strong> con clave RSA dedicada.</li>
+<li>Los resultados de cada ejecución quedan registrados en <code>/var/log/backup.log</code>.</li>
+<li>El código Laravel no se incluye en el backup porque está en GitHub.</li>
+</ul>
 <hr />
 <h3 id="17-datos-y-vistas-de-la-aplicacion">1.7 Datos y vistas de la aplicación</h3>
 <p>La base de datos <code>taller_motos</code> contiene <strong>cinco tablas</strong> interrelacionadas que cubren toda la operativa del taller:</p>
