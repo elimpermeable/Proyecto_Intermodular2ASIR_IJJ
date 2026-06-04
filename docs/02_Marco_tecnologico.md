@@ -140,7 +140,6 @@ El servidor DNS proporciona resolución de nombres independiente de Cloudflare, 
 - **Software:** BIND9 en instancia EC2 independiente (`18.213.221.53`)
 - **Zonas configuradas:**
   - `fhdproyects.innc.link` → `3.217.215.112` (mismo registro que Cloudflare)
-  - `fhdproyects-gestiona.innc.link` → `3.217.215.112`
   - `tallerfhd.gestiona` → `3.217.215.112` (dominio privado, solo existe en este DNS)
 
 **Funcionamiento según el escenario:**
@@ -169,6 +168,7 @@ Las copias de seguridad se realizan automáticamente cada noche a las **2:00 AM*
 | Configuración `/opt/taller` | `tar + rsync` | `/opt/backups/` en servidor backups |
 
 **Características:**
+
 - Cada backup incluye **fecha y hora** en el nombre del archivo para poder restaurar cualquier punto.
 - La conexión entre servidores se realiza mediante **SSH sin contraseña** con clave RSA dedicada.
 - Los resultados de cada ejecución quedan registrados en `/var/log/backup.log`.

@@ -203,7 +203,7 @@ El panel es accesible en `https://tallerfhd.gestiona/admin` **únicamente desde 
 
 Se desplegó una segunda instancia EC2 (`18.213.221.53`) con **BIND9** para proporcionar resolución de nombres propia e independiente de Cloudflare.
 
-Se configuraron tres zonas DNS:
+Se configuraron dos zonas DNS:
 
 - `fhdproyects.innc.link` → `3.217.215.112`
 - `tallerfhd.gestiona` → `3.217.215.112` (dominio inventado, solo existe en este DNS)
