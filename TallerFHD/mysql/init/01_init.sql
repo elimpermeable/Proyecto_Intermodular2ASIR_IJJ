@@ -1,0 +1,17 @@
+CREATE DATABASE IF NOT EXISTS taller_motos
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+
+CREATE USER IF NOT EXISTS 'laravel_user'@'%'
+    IDENTIFIED BY '692207628!Jesus';
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, INDEX, DROP
+    ON taller_motos.* TO 'laravel_user'@'%';
+
+CREATE USER IF NOT EXISTS 'wp_user'@'%'
+    IDENTIFIED BY '692207628!Jesus';
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, INDEX, DROP
+    ON wordpress.* TO 'wp_user'@'%';
+
+FLUSH PRIVILEGES;

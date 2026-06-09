@@ -1,0 +1,94 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: taller_nginx
+    ports:
+      - "80:80"
+      - "8081:8081"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+      - wordpress_files:/var/www/html:ro
+      - laravel_app:/var/www/panel:ro
+    depends_on:
+      - wordpress
+      - laravel
+    networks:
+      - taller_network
+    restart: unless-stopped
+
+  wordpress:
+    image: wordpress:fpm-alpine
+    container_name: taller_wordpress
+    volumes:
+      - wordpress_files:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${WP_DB_NAME}
+      WORDPRESS_DB_USER: ${WP_DB_USER}
+      WORDPRESS_DB_PASSWORD: ${WP_DB_PASSWORD}
+      WORDPRESS_TABLE_PREFIX: wp_
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - taller_network
+    restart: unless-stopped
+
+  laravel:
+    build:
+      context: ./laravel
+      dockerfile: Dockerfile
+    container_name: taller_laravel
+    volumes:
+      - laravel_app:/var/www/panel
+    environment:
+      APP_ENV: ${APP_ENV}
+      APP_KEY: ${APP_KEY}
+      APP_DEBUG: "true"
+      APP_URL: ${APP_URL}
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: ${TALLER_DB_NAME}
+      DB_USERNAME: ${TALLER_DB_USER}
+      DB_PASSWORD: ${TALLER_DB_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - taller_network
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: taller_db
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d:ro
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${WP_DB_NAME}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost",
+             "-u", "root", "--password=${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    networks:
+      - taller_network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+    driver: local
+  wordpress_files:
+    driver: local
+  laravel_app:
+    driver: local
+
+networks:
+  taller_network:
+    driver: bridge
