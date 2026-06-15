@@ -73,12 +73,12 @@ El proyecto consiste en el diseño, implementación y configuración de una **in
 
 Se incluye dentro del alcance del proyecto:
 
-- Despliegue de una página web informativa mediante WordPress con dominio propio y HTTPS.
-- Panel de administración privado con Laravel + Filament para gestión de clientes, motos, reparaciones y mecánicos.
-- Lista de compra interna para gestión de materiales del taller.
-- Servidor DNS propio con BIND9 que resuelve los dominios del taller de forma independiente a Cloudflare.
-- Sistema de copias de seguridad automáticas nocturnas con rsync hacia un servidor independiente.
-- Publicación de la documentación técnica del proyecto a través de GitHub Pages.
+- Infraestructura cloud con tres instancias EC2, contenedores Docker y firewall perimetral (Security Groups).
+- Servicios de red: DNS propio (BIND9), HTTPS y copias de seguridad automáticas en servidor independiente.
+- Aplicaciones sobre la infraestructura: web pública (WordPress), panel de gestión interno (Laravel + Filament) y base de datos MySQL.
+- Documentación técnica publicada en GitHub Pages.
+
+> El detalle de arquitectura, configuración e implementación se desarrolla en los capítulos **Marco Tecnológico**, **Planificación** y **Desarrollo**.
 
 ---
 
@@ -157,76 +157,30 @@ El coste del proyecto en su fase de desarrollo es **prácticamente nulo**, limit
 
 ## 7. Alcance temporal
 
-El proyecto se desarrollará en las siguientes fases:
+El proyecto se organiza en cuatro fases principales — planificación, implementación de sistemas, servicios avanzados (DNS, HTTPS, backups) y validación con documentación — con seis fases de trabajo detalladas, asignación de roles y diagrama de Gantt en el capítulo **Planificación**.
 
-1. **Planificación y análisis**
-   Definición del contexto, objetivos y requisitos del sistema.
-   Entregable: documentación inicial del proyecto.
+Los hitos de entrega son:
 
-2. **Implementación del entorno de sistemas**
-   Despliegue de las instancias EC2, configuración de Docker Compose, Nginx, WordPress, Laravel + Filament y MySQL.
-   Entregable: entorno servidor operativo con panel de gestión funcional.
-
-3. **Servicios avanzados**
-   Configuración del servidor DNS con BIND9, implementación de HTTPS con certificados Cloudflare y despliegue del servidor de backups automáticos.
-   Entregable: infraestructura completa con DNS, HTTPS y copias de seguridad.
-
-4. **Seguridad y documentación**
-   Revisión de seguridad, configuración de Security Groups, y publicación de la documentación técnica completa.
-   Entregable: sistema validado y documentación final.
-
-Los principales hitos del proyecto son:
-
-- **Hito 1:** servidor principal configurado con WordPress y panel Laravel/Filament funcionales.
-- **Hito 2:** servidor DNS operativo resolviendo los dominios del taller.
-- **Hito 3:** sistema de backups automáticos nocurnos funcionando.
-- **Hito 4:** sistema seguro, documentado y listo para entrega.
+- **Hito 1:** servidor principal operativo (Docker, aplicaciones y base de datos).
+- **Hito 2:** servidor DNS resolviendo los dominios del taller.
+- **Hito 3:** copias de seguridad automáticas nocturnas en servidor independiente.
+- **Hito 4:** sistema validado, documentado y listo para entrega.
 
 ---
 
 ## 8. Especificación de requisitos por módulos
 
 ### 8.1 ASGBD – Administración de Sistemas Gestores de Bases de Datos
-- Instalación y configuración del sistema gestor de bases de datos MySQL 8.0 en contenedor Docker.
-- Creación de dos bases de datos separadas: `wordpress` para el CMS y `taller_motos` para la gestión interna.
-- Diseño del esquema relacional de `taller_motos` con 5 tablas: clientes, motos, reparaciones, mecánicos y lista de compra.
-- Configuración de usuarios con privilegios mínimos (`wp_user` y `laravel_user`).
-- Inclusión de ambas bases de datos en el sistema de copias de seguridad automáticas.
-
----
+MySQL 8.0 en contenedor, dos bases de datos separadas (`wordpress` y `taller_motos`), esquema relacional del taller, usuarios con privilegios mínimos e integración con el sistema de backups.
 
 ### 8.2 ASO – Administración de Sistemas Operativos
-- Instalación y configuración de Ubuntu Server 24.04 en tres instancias EC2 independientes.
-- Gestión de usuarios, permisos y políticas básicas de seguridad.
-- Configuración y control de servicios del sistema mediante Docker Compose v2.
-- Implementación de copias de seguridad automáticas nocturnas con `mysqldump` y `rsync`.
-- Automatización mediante `cron` para la ejecución del script de backup a las 2:00 AM.
-- Aislamiento de servicios mediante redes Docker personalizadas.
-
----
+Tres instancias Ubuntu Server 24.04 en AWS, orquestación con Docker Compose v2, redes y volúmenes persistentes, script de backup automatizado con `cron` y acceso SSH por clave.
 
 ### 8.3 IAW – Implantación de Aplicaciones Web
-- Instalación y configuración del servidor web Nginx como reverse proxy.
-- Instalación y configuración de WordPress como web pública del taller.
-- Instalación y configuración de Laravel 12 + Filament v3 como panel de administración privado.
-- Creación de modelos Eloquent y Resources de Filament para la gestión del taller.
-- Administración de usuarios del CMS y del panel de administración.
-
----
+Nginx como reverse proxy con HTTPS, WordPress como CMS público y Laravel 12 + Filament v3 como panel de gestión privado.
 
 ### 8.4 Servicios de Red e Internet
-- Configuración de acceso remoto seguro mediante SSH con autenticación por clave pública.
-- Despliegue y configuración de servidor DNS propio con **BIND9** en instancia EC2 independiente.
-- Creación de zonas DNS para `fhdproyects.innc.link` y `tallerfhd.gestiona`.
-- Publicación del servicio web mediante Nginx con HTTPS.
-- Implementación de certificados SSL mediante **Cloudflare Origin Certificates**.
-
----
+Acceso remoto SSH, servidor DNS propio con BIND9, zonas para los dominios del taller y certificados SSL Cloudflare Origin.
 
 ### 8.5 Seguridad y Alta Disponibilidad
-- Configuración de **Security Groups de AWS** como firewall perimetral para las tres instancias.
-- Implementación de certificados SSL con **Cloudflare** para comunicaciones HTTPS.
-- Configuración de Nginx para forzar el uso de HTTPS mediante redirección 301.
-- Análisis de amenazas y aplicación de medidas de protección (matriz de vulnerabilidades).
-- Protección frente a pérdida de datos mediante copias de seguridad automáticas en servidor independiente.
-- Aislamiento de MySQL: puerto 3306 nunca expuesto al exterior, solo accesible desde red interna Docker.
+Security Groups de AWS, HTTPS forzado, matriz de vulnerabilidades, aislamiento de MySQL y copias de seguridad en servidor independiente.

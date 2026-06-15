@@ -85,51 +85,21 @@ El sistema se implementa sobre **tres instancias AWS EC2 con Ubuntu Server 24.04
 
 ### 1.4 Servicios en contenedores
 
-#### Contenedor Nginx — Reverse Proxy
+Cuatro contenedores en el servidor principal, conectados por la red interna `taller_network`. Nginx es el **único punto de entrada** desde el exterior; MySQL nunca expone el puerto 3306.
 
-- Imagen: `nginx:alpine`
-- **Único punto de entrada** desde el exterior. Ningún otro contenedor tiene puertos expuestos directamente.
-- Gestiona el enrutamiento según el **dominio** de la petición:
-  - `fhdproyects.innc.link` → WordPress (web pública)
-  - `tallerfhd.gestiona` → Laravel + Filament (panel admin, solo DNS privado)
-- Fuerza **HTTPS** en todos los accesos mediante redirección 301.
-- Certificados SSL de **Cloudflare Origin Certificates** para `*.innc.link`.
+| Contenedor | Imagen | Rol principal |
+|------------|--------|---------------|
+| Nginx | `nginx:alpine` | Reverse proxy, HTTPS y enrutamiento por dominio |
+| WordPress | `wordpress:fpm-alpine` | CMS de la web pública (`fhdproyects.innc.link`) |
+| Laravel + Filament | `php:8.2-fpm-alpine` (custom) | Panel de gestión privado (`tallerfhd.gestiona`) |
+| MySQL | `mysql:8.0` | Dos BDs separadas con usuarios de privilegios mínimos |
 
-#### Contenedor WordPress — Web pública
+**Enrutamiento por dominio:**
 
-- Imagen: `wordpress:fpm-alpine`
-- CMS que sirve la web pública del taller **FHD Proyects**.
-- Ejecuta PHP mediante **PHP-FPM** (puerto interno 9000), no expuesto al exterior.
-- Conectado a MySQL a través de la red interna Docker.
-- Almacena archivos en el volumen persistente `wordpress_files`.
-- Accede exclusivamente a la base de datos `wordpress` con el usuario `wp_user`.
-- Accesible en `https://fhdproyects.innc.link`.
+- `fhdproyects.innc.link` → WordPress (acceso público)
+- `tallerfhd.gestiona` → Laravel/Filament (solo DNS privado)
 
-#### Contenedor Laravel + Filament — Panel de administración
-
-- Imagen personalizada: `php:8.2-fpm-alpine` con Composer, Laravel 12 y Filament v3.
-- **Panel de gestión privado** del taller, accesible en `/admin`.
-- Permite gestionar:
-  - Clientes del taller
-  - Motos registradas (vinculadas a su cliente)
-  - Reparaciones con estado, fechas y costes
-  - Mecánicos asignados
-  - Lista de compra de materiales
-- Sistema de **login propio** con autenticación mediante Filament.
-- Accede exclusivamente a la base de datos `taller_motos` con el usuario `laravel_user`.
-- Usa **Eloquent ORM** para todas las operaciones de base de datos, protegiendo contra inyección SQL.
-- Accesible **solo desde equipos con el DNS privado configurado** en `https://tallerfhd.gestiona`.
-
-#### Contenedor MySQL 8.0 — Motor de base de datos
-
-- Imagen: `mysql:8.0`
-- Puerto 3306 **nunca expuesto al exterior**, solo accesible desde la red interna Docker.
-- Contiene **dos bases de datos separadas**:
-  - `wordpress` → datos del CMS (tablas estándar de WordPress)
-  - `taller_motos` → datos del negocio del taller
-- Cada aplicación tiene su propio usuario con **privilegios mínimos**.
-- Datos persistidos en el volumen `mysql_data`.
-- **Healthcheck** activo: los demás contenedores esperan a que MySQL esté listo antes de arrancar.
+> La configuración concreta (`docker-compose.yml`, Nginx, SQL de inicialización, Dockerfile) se documenta en el capítulo **Desarrollo**.
 
 ---
 
@@ -156,9 +126,7 @@ El servidor DNS proporciona resolución de nombres independiente de Cloudflare, 
 
 ### 1.6 Sistema de copias de seguridad
 
-Las copias de seguridad se realizan automáticamente cada noche a las **2:00 AM** mediante un script ejecutado por `cron` en el servidor principal, que envía los archivos al servidor de backups mediante `rsync` sobre SSH.
-
-**Qué se guarda:**
+Diseño del sistema de backups: copias automáticas nocturnas (2:00 AM) desde el servidor principal hacia una instancia EC2 independiente, mediante `mysqldump`, `tar` y `rsync` sobre SSH.
 
 | Elemento | Método | Destino |
 |----------|--------|---------|
@@ -167,82 +135,21 @@ Las copias de seguridad se realizan automáticamente cada noche a las **2:00 AM*
 | Archivos WordPress | `tar + rsync` | `/opt/backups/` en servidor backups |
 | Configuración `/opt/taller` | `tar + rsync` | `/opt/backups/` en servidor backups |
 
-**Características:**
-
-- Cada backup incluye **fecha y hora** en el nombre del archivo para poder restaurar cualquier punto.
-- La conexión entre servidores se realiza mediante **SSH sin contraseña** con clave RSA dedicada.
-- Los resultados de cada ejecución quedan registrados en `/var/log/backup.log`.
-- El código Laravel no se incluye en el backup porque está en GitHub.
+> El script `backup.sh`, la clave SSH y la entrada de `cron` se documentan en el capítulo **Desarrollo** (§9).
 
 ---
 
-### 1.7 Datos y vistas de la aplicación
+### 1.7 Modelo de datos
 
-La base de datos `taller_motos` contiene **cinco tablas** interrelacionadas que cubren toda la operativa del taller:
+La base de datos `taller_motos` contiene **cinco tablas** interrelacionadas (clientes, motos, reparaciones, mecánicos y lista de compra):
 
 ![Esquema de la base de datos taller_motos](images/BaseDatos.png)
 
 *Figura 3. Esquema relacional de la base de datos `taller_motos`, con sus tablas, campos y relaciones entre entidades.*
 
-#### Clientes registrados
-
-| ID | NOMBRE | APELLIDOS    | TELEFONO  | EMAIL             |
-|----|--------|--------------|-----------|-------------------|
-| 1  | Juan   | Garcia Lopez | 612345678 | juan@ejemplo.com  |
-| 2  | Maria  | Sanchez Ruiz | 698765432 | maria@ejemplo.com |
-
-#### Motos registradas
-
-| MATRICULA | MARCA  | MODELO    | CLIENTE       |
-|-----------|--------|-----------|---------------|
-| 1234ABC   | Honda  | CBR 600RR | Juan Garcia   |
-| 5678DEF   | Yamaha | MT-07     | Maria Sanchez |
-
-#### Reparaciones
-
-| MOTO    | MECANICO  | MOTIVO                           | ESTADO     | KM     | PRECIO |
-|---------|-----------|----------------------------------|------------|--------|--------|
-| 1234ABC | Carlos M. | Revision general y cambio aceite | Terminada  | 15.400 | 85,00€ |
-| 5678DEF | Pedro J.  | Fallo en sistema de encendido    | En proceso | 8.200  | —      |
-
-#### Lista de compra
-
-| MATERIAL          | CANTIDAD  | URGENTE | COMPRADO |
-|-------------------|-----------|---------|----------|
-| Aceite 10W40      | 5 litros  | Sí      | No       |
-| Filtros Honda     | 2 unidades| No      | No       |
-
-*Figura 4. Ejemplo de los datos disponibles en el panel de administración de Laravel/Filament.*
-
 ---
 
-### 1.8 Estructura de archivos en el servidor
-
-La estructura de directorios del proyecto en la instancia EC2 principal es la siguiente:
-
-```
-/opt/taller/
-├── docker-compose.yml          # Orquestador principal de servicios
-├── .env                        # Variables de entorno y credenciales (no en Git)
-├── backup.sh                   # Script de backup automático nocturno
-├── nginx/
-│   ├── conf.d/
-│   │   └── default.conf        # Configuración de Nginx: dominios y HTTPS
-│   └── certs/
-│       ├── certpub.pem         # Certificado SSL público (Cloudflare)
-│       └── certpriv.key        # Clave privada SSL (Cloudflare)
-├── mysql/
-│   └── init/
-│       └── 01_init.sql         # Script de inicialización: crea DBs, usuarios y tablas
-└── laravel/
-    └── Dockerfile              # Imagen personalizada PHP 8.2 + intl + Composer
-```
-
-Los datos de aplicación (código Laravel, archivos WordPress, datos MySQL) se almacenan en **volúmenes Docker gestionados** por el sistema, fuera del directorio del proyecto.
-
----
-
-### 1.9 Flujo de datos
+### 1.8 Flujo de datos
 
 1. El usuario introduce el dominio en el navegador.
 2. El equipo consulta su servidor DNS configurado:
@@ -260,7 +167,7 @@ Los datos de aplicación (código Laravel, archivos WordPress, datos MySQL) se a
 
 ---
 
-### 1.10 Seguridad y aislamiento
+### 1.9 Seguridad y aislamiento
 
 - **Security Groups de AWS**
   - Cada instancia tiene su Security Group específico con solo los puertos necesarios.
@@ -297,7 +204,7 @@ Los datos de aplicación (código Laravel, archivos WordPress, datos MySQL) se a
 
 ---
 
-### 1.11 Justificación del diseño
+### 1.10 Justificación del diseño
 
 - **Tres instancias separadas** garantizan que un fallo en un servidor no afecte al resto.
 - **Separación de servicios en contenedores** para aislamiento, seguridad y facilidad de mantenimiento.
@@ -310,7 +217,7 @@ Los datos de aplicación (código Laravel, archivos WordPress, datos MySQL) se a
 
 ---
 
-### 1.12 Matriz de vulnerabilidades
+### 1.11 Matriz de vulnerabilidades
 
 La siguiente matriz recoge las principales vulnerabilidades asociadas a la infraestructura implementada, su impacto, probabilidad estimada y las medidas de mitigación aplicadas.
 

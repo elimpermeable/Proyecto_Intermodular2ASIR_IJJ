@@ -25,11 +25,13 @@ Se ha desplegado con éxito una infraestructura completa en la nube compuesta po
 
 ---
 
-## 3. Infraestructura desplegada
+## 3. Evidencias del despliegue
 
-### 3.1 Servidor principal
+Las pruebas se organizan por capas de infraestructura (prioridad ASIR). Las aplicaciones web se validan al final.
 
-Cuatro contenedores Docker operativos en red interna `taller_network`:
+### 3.1 Servidor principal — contenedores Docker
+
+Cuatro contenedores operativos en red interna `taller_network`:
 
 | Contenedor | Imagen | Estado |
 |------------|--------|--------|
@@ -38,48 +40,45 @@ Cuatro contenedores Docker operativos en red interna `taller_network`:
 | taller_laravel | php:8.2-fpm-alpine (custom) | ✅ Running |
 | taller_db | mysql:8.0 | ✅ Healthy |
 
-
 ![Estado de los contenedores Docker](images/dockerpsa.png)
 
 ---
 
-### 3.2 Web pública WordPress
+### 3.2 Servidor DNS con BIND9
 
-La página web del taller **FHD Proyects** es accesible públicamente en `https://fhdproyects.innc.link` con certificado SSL válido.
-
-![Web pública WordPress](images/wordpress_web.png)
-
----
-
-### 3.3 Panel de administración Laravel + Filament
-
-El panel privado de gestión del taller es accesible en `https://tallerfhd.gestiona/admin` únicamente desde equipos con el DNS privado configurado.
-
-![Módulo de reparaciones](images/filament_reparaciones.png)
-
----
-
-### 3.4 Base de datos
-
-La base de datos `taller_motos` contiene las 5 tablas diseñadas con sus relaciones correctamente establecidas.
-
-![Tablas de la base de datos taller_motos](images/mysql_tables.png)
-
----
-
-### 3.5 Servidor DNS con BIND9
-
-El servidor DNS privado resuelve correctamente los dominios del taller, incluyendo el dominio inventado `tallerfhd.gestiona` que no existe en Cloudflare.
+El DNS privado resuelve correctamente los dominios del taller, incluido `tallerfhd.gestiona` (solo existe en BIND9).
 
 ![Resolución DNS con BIND9](images/dns_dig.png)
 
 ---
 
-### 3.6 Sistema de copias de seguridad
+### 3.3 Sistema de copias de seguridad
 
-El sistema de backups automáticos funciona correctamente, enviando las copias de seguridad al servidor independiente cada noche.
+Backups automáticos recibidos cada noche en el servidor independiente.
 
 ![Archivos de backup en el servidor independiente](images/backups_ls.png)
+
+---
+
+### 3.4 Base de datos
+
+La base `taller_motos` contiene las 5 tablas con relaciones correctamente establecidas.
+
+![Tablas de la base de datos taller_motos](images/mysql_tables.png)
+
+---
+
+### 3.5 Aplicaciones web
+
+Con la infraestructura validada, las aplicaciones implantadas funcionan correctamente:
+
+**Web pública WordPress** — `https://fhdproyects.innc.link`
+
+![Web pública WordPress](images/wordpress_web.png)
+
+**Panel de gestión Laravel/Filament** — `https://tallerfhd.gestiona/admin` (solo DNS privado)
+
+![Módulo de reparaciones](images/filament_reparaciones.png)
 
 ---
 

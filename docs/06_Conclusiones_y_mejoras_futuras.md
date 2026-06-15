@@ -4,14 +4,9 @@
 
 ### 1.1 Valoración técnica
 
-El proyecto ha permitido desplegar una infraestructura completa, funcional y segura que cubre todas las necesidades digitales de un taller real. Se ha pasado de una situación inicial sin ninguna presencia digital a disponer de:
+El proyecto ha cumplido todos los objetivos de planificación. Se ha desplegado una infraestructura cloud completa — tres instancias EC2, contenedores Docker, DNS propio, HTTPS y backups automáticos — sobre la que funcionan las aplicaciones web del taller.
 
-- Una **web pública** accesible desde cualquier dispositivo del mundo con dominio propio y HTTPS.
-- Un **panel de administración privado** para la gestión interna del taller, accesible únicamente desde equipos autorizados mediante DNS privado.
-- Un **servidor DNS propio** capaz de resolver los dominios del taller de forma independiente a proveedores externos.
-- Un **sistema de copias de seguridad automáticas** nocturnas en servidor independiente, garantizando la continuidad del negocio ante cualquier fallo.
-
-Todos los objetivos definidos en la fase de planificación han sido cumplidos. La arquitectura resultante es modular, reproducible y alineada con entornos de producción reales.
+La arquitectura resultante es modular, reproducible y alineada con entornos de producción reales. El detalle de evidencias se recoge en el capítulo **Resultados**.
 
 ---
 

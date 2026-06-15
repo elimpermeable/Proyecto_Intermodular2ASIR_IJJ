@@ -26,50 +26,38 @@ A cada rol se le asigna un integrante del equipo:
 
 #### Rol 1: Responsable de infraestructura y sistemas
 
-Este rol se encarga del diseño, implementación y mantenimiento de la infraestructura técnica del proyecto, incluyendo las tres instancias EC2, Docker, sus contenedores, volúmenes, el servidor DNS y el sistema de backups.
+Diseño, implementación y mantenimiento de las tres instancias EC2, Docker, DNS (BIND9), HTTPS, Security Groups y sistema de backups.
 
 **Funciones principales:**
 
-- Instalación y configuración del sistema operativo Ubuntu Server 24.04 en las tres instancias EC2.
-- Asignación de Elastic IPs y configuración de Security Groups en AWS.
-- Instalación y configuración de Docker Engine + Docker Compose v2.
-- Diseño de la arquitectura de contenedores y red interna `taller_network`.
-- Configuración de volúmenes persistentes para contenedores.
-- Implementación y configuración del servidor DNS con BIND9.
-- Creación de zonas DNS para los dominios del taller.
-- Implementación del sistema de copias de seguridad automáticas con `mysqldump`, `rsync` y `cron`.
-- Configuración del acceso remoto seguro mediante SSH con claves RSA.
-- Gestión de certificados SSL de Cloudflare para habilitar HTTPS.
+- Despliegue y administración de Ubuntu Server 24.04 en AWS.
+- Orquestación de contenedores, redes y volúmenes con Docker Compose v2.
+- Configuración de BIND9, certificados SSL y script de backup automatizado.
+- Acceso remoto seguro por SSH con claves RSA.
 
 ---
 
 #### Rol 2: Responsable de la base de datos
 
-Este rol se centra en la implantación y la gestión de la base de datos.
+Implantación y gestión de MySQL 8.0: esquema relacional del taller, usuarios con privilegios mínimos e integración con WordPress y Laravel.
 
 **Funciones principales:**
 
-- Instalación y configuración del contenedor de MySQL 8.0.
-- Diseño y creación de las dos bases de datos: `wordpress` y `taller_motos`.
-- Definición de tablas, claves primarias y claves foráneas en español.
-- Creación del esquema relacional con 5 tablas: clientes, motos, reparaciones, mecánicos y lista de compra.
-- Integración de WordPress con la base de datos MySQL.
-- Integración de Laravel 12 con la base de datos `taller_motos` mediante Eloquent ORM.
-- Gestión de usuarios y permisos con privilegios mínimos (`wp_user` y `laravel_user`).
+- Diseño del esquema `taller_motos` (5 tablas en español).
+- Script de inicialización `01_init.sql` y usuarios `wp_user` / `laravel_user`.
+- Validación de persistencia e inclusión en el sistema de backups.
 
 ---
 
 #### Rol 3: Responsable de diseño de aplicación y seguridad
 
-Este rol se encarga del diseño de la página WordPress, del panel de administración Laravel/Filament y de la seguridad perimetral del servidor.
+Implantación de WordPress y Laravel/Filament sobre la infraestructura, y revisión de la seguridad perimetral en AWS.
 
 **Funciones principales:**
 
-- Diseño de la página web WordPress a nivel de frontend y backend.
-- Instalación y configuración de Laravel 12 + Filament v3 como panel de administración privado.
-- Creación de los módulos de gestión: Clientes, Motos, Reparaciones, Mecánicos y Lista de Compra.
-- Verificación del correcto acceso a WordPress y al panel desde la web.
-- Configuración de Security Groups de AWS para minimizar la exposición de puertos no deseados.
+- Despliegue de WordPress (web pública) y Laravel 12 + Filament v3 (panel privado).
+- Módulos de gestión del taller en Filament.
+- Verificación de accesos y revisión de Security Groups.
 
 ---
 
