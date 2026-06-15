@@ -9,15 +9,9 @@ Cada miembro asume un rol principal, aunque existe colaboración puntual entre r
 
 El equipo de trabajo se estructura en los siguientes roles principales:
 
-- **Responsable de infraestructura y sistemas**
-- **Responsable de la base de datos**
-- **Responsable de diseño de aplicaciones y seguridad**
-
-A cada rol se le asigna un integrante del equipo:
-
-- **Jesús**: responsable de la instalación, administración y mantenimiento tanto del host Ubuntu Server 24.04 como de las redes, contenedores Docker, servidor DNS y sistema de copias de seguridad.
-- **Jose Carlos**: responsable de la creación, mantenimiento y gestión de la base de datos, adaptada a las necesidades del taller.
-- **Israel**: responsable del diseño de la página web y de la seguridad perimetral del servidor mediante Security Groups de AWS.
+- **Responsable de infraestructura y sistemas**: responsable de la instalación, administración y mantenimiento tanto del host Ubuntu Server 24.04 como de las redes, contenedores Docker, servidor DNS y sistema de copias de seguridad.
+- **Responsable de la base de datos**: responsable de la creación, mantenimiento y gestión de la base de datos, adaptada a las necesidades del taller.
+- **Responsable de diseño de aplicaciones y seguridad**: responsable del diseño de la página web y de la seguridad perimetral del servidor mediante Security Groups de AWS.
 - **Tutor del proyecto**: supervisión y validación de los entregables.
 
 ---
