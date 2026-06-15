@@ -100,5 +100,3 @@ docker compose down && docker compose up -d
 
 ---
 
-### 2.2 Script de backup
-
