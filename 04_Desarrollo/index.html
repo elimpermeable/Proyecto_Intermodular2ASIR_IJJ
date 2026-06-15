@@ -491,10 +491,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-panel-de-administracion-laravel-12-filament-v3" class="md-nav__link">
+  <a href="#7-aplicaciones-web-wordpress-y-laravelfilament" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Panel de administración Laravel 12 + Filament v3
+        7. Aplicaciones web (WordPress y Laravel/Filament)
       
     </span>
   </a>
@@ -521,6 +521,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="9. Sistema de copias de seguridad automáticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-script-backupsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Script backup.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-automatizacion-con-cron" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Automatización con cron
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -528,17 +556,6 @@
     <span class="md-ellipsis">
       
         10. Verificación del sistema
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#11-conclusiones-de-la-fase-de-desarrollo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        11. Conclusiones de la fase de desarrollo
       
     </span>
   </a>
@@ -744,10 +761,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-panel-de-administracion-laravel-12-filament-v3" class="md-nav__link">
+  <a href="#7-aplicaciones-web-wordpress-y-laravelfilament" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Panel de administración Laravel 12 + Filament v3
+        7. Aplicaciones web (WordPress y Laravel/Filament)
       
     </span>
   </a>
@@ -774,6 +791,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="9. Sistema de copias de seguridad automáticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-script-backupsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Script backup.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-automatizacion-con-cron" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Automatización con cron
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -781,17 +826,6 @@
     <span class="md-ellipsis">
       
         10. Verificación del sistema
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#11-conclusiones-de-la-fase-de-desarrollo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        11. Conclusiones de la fase de desarrollo
       
     </span>
   </a>
@@ -819,133 +853,13 @@
 <p>En esta fase se ha llevado a cabo el despliegue completo de la infraestructura necesaria para el funcionamiento del sistema de gestión del taller <strong>FHD Proyects</strong>, utilizando servicios de <strong>AWS</strong> y contenedores <strong>Docker</strong> orquestados mediante <strong>Docker Compose v2</strong>.</p>
 <hr />
 <h2 id="1-infraestructura-en-aws">1. Infraestructura en AWS</h2>
-<p>Se han desplegado <strong>tres instancias EC2</strong> en la región <code>us-east-1</code> con <strong>Ubuntu Server 24.04 LTS</strong>, cada una con una <strong>Elastic IP</strong> fija asociada.</p>
-<table>
-<thead>
-<tr>
-<th>Instancia</th>
-<th>IP</th>
-<th>Tipo</th>
-<th>Función</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>taller-fhd-principal</td>
-<td>3.217.215.112</td>
-<td>t3.medium</td>
-<td>Servidor web, panel admin y base de datos</td>
-</tr>
-<tr>
-<td>taller-fhd-dns</td>
-<td>18.213.221.53</td>
-<td>t3.micro</td>
-<td>Servidor DNS con BIND9</td>
-</tr>
-<tr>
-<td>taller-fhd-backups</td>
-<td>54.165.242.48</td>
-<td>t3.micro</td>
-<td>Servidor de copias de seguridad</td>
-</tr>
-</tbody>
-</table>
+<p>Se desplegaron <strong>tres instancias EC2</strong> en la región <code>us-east-1</code> con <strong>Ubuntu Server 24.04 LTS</strong> y <strong>Elastic IP</strong> fija, según el diseño descrito en el capítulo <strong>Marco Tecnológico</strong> (§1.1).</p>
 <h3 id="security-groups">Security Groups</h3>
-<p>Cada instancia dispone de su propio Security Group con únicamente los puertos necesarios:</p>
-<p><strong>Servidor principal:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Puerto</th>
-<th>Protocolo</th>
-<th>Origen</th>
-<th>Uso</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>22</td>
-<td>TCP</td>
-<td>IP propia</td>
-<td>Administración remota por SSH</td>
-</tr>
-<tr>
-<td>80</td>
-<td>TCP</td>
-<td>0.0.0.0/0</td>
-<td>Redirección HTTP → HTTPS</td>
-</tr>
-<tr>
-<td>443</td>
-<td>TCP</td>
-<td>0.0.0.0/0</td>
-<td>Web pública WordPress (HTTPS)</td>
-</tr>
-<tr>
-<td>8081</td>
-<td>TCP</td>
-<td>0.0.0.0/0</td>
-<td>Panel admin Laravel (HTTPS)</td>
-</tr>
-</tbody>
-</table>
+<p>Los Security Groups se configuraron según las tablas del Marco Tecnológico (§1.2). Evidencia en consola AWS:</p>
+<p><img alt="Security Group — servidor principal" src="../images/securitygroups.png" /></p>
+<p><img alt="Security Group — servidor DNS" src="../images/securitygroups2.png" /></p>
+<p><img alt="Security Group — servidor de backups" src="../images/securitygroups3.png" /></p>
 <p>El puerto <strong>3306 (MySQL) no está expuesto</strong> en ningún momento.</p>
-<p><strong>Servidor DNS:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Puerto</th>
-<th>Protocolo</th>
-<th>Origen</th>
-<th>Uso</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>22</td>
-<td>TCP</td>
-<td>IP propia</td>
-<td>SSH</td>
-</tr>
-<tr>
-<td>53</td>
-<td>UDP</td>
-<td>0.0.0.0/0</td>
-<td>Consultas DNS</td>
-</tr>
-<tr>
-<td>53</td>
-<td>TCP</td>
-<td>0.0.0.0/0</td>
-<td>Consultas DNS</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Servidor de backups:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Puerto</th>
-<th>Protocolo</th>
-<th>Origen</th>
-<th>Uso</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>22</td>
-<td>TCP</td>
-<td>IP propia</td>
-<td>SSH administrador</td>
-</tr>
-<tr>
-<td>22</td>
-<td>TCP</td>
-<td>3.217.215.112/32</td>
-<td>Recepción de backups por rsync</td>
-</tr>
-</tbody>
-</table>
 <hr />
 <h2 id="2-estructura-del-proyecto">2. Estructura del proyecto</h2>
 <p>Todos los archivos de configuración se organizan bajo <code>/opt/taller</code> en el servidor principal:</p>
@@ -1032,19 +946,52 @@ networks:
 <p>Todas las credenciales se cargan desde el fichero <code>.env</code>, que nunca se sube al repositorio Git.</p>
 <hr />
 <h2 id="4-nginx-como-reverse-proxy-con-https">4. Nginx como Reverse Proxy con HTTPS</h2>
-<p>Nginx actúa como único punto de entrada desde el exterior. Enruta el tráfico según el <strong>dominio</strong> de la petición y fuerza HTTPS en todos los accesos mediante redirección 301:</p>
-<ul>
-<li><code>fhdproyects.innc.link</code> → WordPress (web pública)</li>
-<li><code>tallerfhd.gestiona</code> → Laravel + Filament (panel admin, solo DNS privado)</li>
-</ul>
-<p>Los certificados SSL son <strong>Cloudflare Origin Certificates</strong> para <code>*.innc.link</code>, almacenados en <code>/opt/taller/nginx/certs/</code>.</p>
+<p>Nginx actúa como único punto de entrada. Enruta por <strong>dominio</strong> y fuerza HTTPS (redirección 301). Certificados <strong>Cloudflare Origin</strong> en <code>/opt/taller/nginx/certs/</code>.</p>
+<p>Fragmento relevante de <code>nginx/conf.d/default.conf</code>:</p>
+<pre><code class="language-nginx"># Redirección HTTP → HTTPS
+server {
+    listen 80;
+    server_name fhdproyects.innc.link tallerfhd.gestiona;
+    return 301 https://$host$request_uri;
+}
+
+# Web pública WordPress
+server {
+    listen 443 ssl;
+    server_name fhdproyects.innc.link;
+    ssl_certificate     /etc/nginx/certs/certpub.pem;
+    ssl_certificate_key /etc/nginx/certs/certpriv.key;
+    location / {
+        try_files $uri $uri/ /index.php?$args;
+        fastcgi_pass wordpress:9000;
+        include fastcgi_params;
+    }
+}
+
+# Panel admin Laravel (solo DNS privado)
+server {
+    listen 8081 ssl;
+    server_name tallerfhd.gestiona;
+    ssl_certificate     /etc/nginx/certs/certpub.pem;
+    ssl_certificate_key /etc/nginx/certs/certpriv.key;
+    root /var/www/panel/public;
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+        fastcgi_pass laravel:9000;
+        include fastcgi_params;
+    }
+}
+</code></pre>
+<blockquote>
+<p>El fichero completo incluye bloques <code>fastcgi</code> adicionales para PHP-FPM.</p>
+</blockquote>
 <hr />
 <h2 id="5-imagen-personalizada-de-laravel">5. Imagen personalizada de Laravel</h2>
 <p>Dado que Laravel 12 y Filament v3 requieren extensiones PHP adicionales, se creó una imagen personalizada a partir de <code>php:8.2-fpm-alpine</code> que incluye todas las dependencias necesarias, entre ellas <code>pdo_mysql</code>, <code>intl</code>, <code>gd</code> y <code>zip</code>, además de <strong>Composer</strong> para la gestión de paquetes.</p>
 <p>La extensión <code>intl</code> requiere la dependencia del sistema <code>icu-dev</code>, que debe instalarse explícitamente antes de compilarla.</p>
 <hr />
 <h2 id="6-base-de-datos">6. Base de datos</h2>
-<p>MySQL gestiona <strong>dos bases de datos separadas</strong> dentro del mismo contenedor:</p>
+<p>MySQL gestiona <strong>dos bases de datos separadas</strong> dentro del mismo contenedor (esquema ER en Marco Tecnológico §1.7):</p>
 <ul>
 <li><code>wordpress</code> — datos del CMS, accedida por el usuario <code>wp_user</code>.</li>
 <li><code>taller_motos</code> — datos del negocio, accedida por el usuario <code>laravel_user</code>.</li>
@@ -1082,16 +1029,13 @@ networks:
 </table>
 <p>Las relaciones entre tablas son: un cliente puede tener varias motos, y una moto puede tener varias reparaciones. Cada reparación tiene un mecánico asignado.</p>
 <hr />
-<h2 id="7-panel-de-administracion-laravel-12-filament-v3">7. Panel de administración Laravel 12 + Filament v3</h2>
-<p>Tras el despliegue de los contenedores se instaló <strong>Laravel 12</strong> y <strong>Filament v3</strong> dentro del contenedor, generando cinco módulos de gestión del taller:</p>
+<h2 id="7-aplicaciones-web-wordpress-y-laravelfilament">7. Aplicaciones web (WordPress y Laravel/Filament)</h2>
+<p>Sobre la infraestructura descrita, se implantaron dos aplicaciones:</p>
 <ul>
-<li><strong>Clientes</strong> — registro y búsqueda de clientes.</li>
-<li><strong>Motos</strong> — vehículos vinculados a cada cliente.</li>
-<li><strong>Reparaciones</strong> — historial de trabajos con estado, fechas y precios.</li>
-<li><strong>Mecánicos</strong> — personal del taller con estado activo/inactivo.</li>
-<li><strong>Lista de compra</strong> — materiales pendientes de adquirir, con prioridad urgente.</li>
+<li><strong>WordPress</strong> — CMS de la web pública en <code>https://fhdproyects.innc.link</code>.</li>
+<li><strong>Laravel 12 + Filament v3</strong> — panel de gestión en <code>https://tallerfhd.gestiona/admin</code>, accesible solo con DNS privado. Cinco módulos: clientes, motos, reparaciones, mecánicos y lista de compra.</li>
 </ul>
-<p>El panel es accesible en <code>https://tallerfhd.gestiona/admin</code> <strong>únicamente desde equipos que tengan configurado el DNS privado</strong>.</p>
+<p>La personalización del panel (modelos Eloquent, Resources de Filament) es la capa de aplicación sobre el esquema SQL ya definido. Las capturas de funcionamiento se recogen al final del capítulo <strong>Resultados</strong>.</p>
 <hr />
 <h2 id="8-servidor-dns-con-bind9">8. Servidor DNS con BIND9</h2>
 <p>Se desplegó una segunda instancia EC2 (<code>18.213.221.53</code>) con <strong>BIND9</strong> para proporcionar resolución de nombres propia e independiente de Cloudflare.</p>
@@ -1108,75 +1052,133 @@ networks:
 </ul>
 <hr />
 <h2 id="9-sistema-de-copias-de-seguridad-automaticas">9. Sistema de copias de seguridad automáticas</h2>
-<p>Se desplegó una tercera instancia EC2 (<code>54.165.242.48</code>) dedicada exclusivamente a recibir copias de seguridad.</p>
-<p>Se configuró una <strong>conexión SSH sin contraseña</strong> entre el servidor principal y el servidor de backups mediante una clave RSA dedicada generada en el servidor principal.</p>
-<p>El script <code>/opt/taller/backup.sh</code> realiza automáticamente cada noche a las <strong>2:00 AM</strong> (programado con <code>cron</code>):</p>
-<ol>
-<li>Volcado de la base de datos <code>wordpress</code> con <code>mysqldump</code></li>
-<li>Volcado de la base de datos <code>taller_motos</code> con <code>mysqldump</code></li>
-<li>Compresión de los archivos WordPress con <code>tar</code></li>
-<li>Compresión de la configuración <code>/opt/taller</code> con <code>tar</code></li>
-<li>Envío de todos los archivos al servidor de backups mediante <code>rsync</code> sobre SSH</li>
-<li>Limpieza de archivos temporales locales</li>
-</ol>
-<p>Cada backup incluye <strong>fecha y hora</strong> en el nombre del archivo. Los resultados quedan registrados en <code>/var/log/backup.log</code>.</p>
+<p>Tercera instancia EC2 (<code>54.165.242.48</code>) dedicada a recibir backups. Conexión <strong>SSH sin contraseña</strong> entre servidores con clave RSA dedicada (<code>~/.ssh/backup_key</code>).</p>
+<h3 id="91-script-backupsh">9.1 Script <code>backup.sh</code></h3>
+<p>Ubicado en <code>/opt/taller/backup.sh</code>:</p>
+<pre><code class="language-bash">#!/bin/bash
+
+# =====================================================
+# Script de backup automático — Taller FHD
+# Ejecutado cada noche a las 2:00 AM mediante cron
+# =====================================================
+
+FECHA=$(date +%Y%m%d_%H%M%S)
+SERVIDOR_BACKUP=&quot;ubuntu@54.165.242.48&quot;
+CLAVE_SSH=&quot;/home/ubuntu/.ssh/backup_key&quot;
+CARPETA_BACKUP=&quot;/opt/backups&quot;
+MYSQL_ROOT_PASS=&quot;TuPasswordRoot&quot;
+
+echo &quot;[$FECHA] Iniciando backup...&quot;
+
+# 1. Backup base de datos WordPress
+echo &quot;Haciendo backup de WordPress DB...&quot;
+docker compose -f /opt/taller/docker-compose.yml exec -T db \
+    mysqldump -u root -p&quot;$MYSQL_ROOT_PASS&quot; wordpress \
+    &gt; /tmp/wordpress_$FECHA.sql
+
+# 2. Backup base de datos taller_motos
+echo &quot;Haciendo backup de taller_motos DB...&quot;
+docker compose -f /opt/taller/docker-compose.yml exec -T db \
+    mysqldump -u root -p&quot;$MYSQL_ROOT_PASS&quot; taller_motos \
+    &gt; /tmp/taller_motos_$FECHA.sql
+
+# 3. Backup archivos WordPress
+echo &quot;Haciendo backup de archivos WordPress...&quot;
+docker run --rm \
+    -v wordpress_files:/data \
+    -v /tmp:/backup \
+    alpine tar czf /backup/wordpress_files_$FECHA.tar.gz -C /data .
+
+# 4. Backup configuración /opt/taller
+echo &quot;Haciendo backup de configuración...&quot;
+tar czf /tmp/config_$FECHA.tar.gz --exclude=/opt/taller/nginx/certs /opt/taller
+
+# 5. Enviar todo al servidor de backups
+echo &quot;Enviando backups al servidor remoto...&quot;
+rsync -avz -e &quot;ssh -i $CLAVE_SSH -o StrictHostKeyChecking=no&quot; \
+    /tmp/wordpress_$FECHA.sql \
+    /tmp/taller_motos_$FECHA.sql \
+    /tmp/wordpress_files_$FECHA.tar.gz \
+    /tmp/config_$FECHA.tar.gz \
+    $SERVIDOR_BACKUP:$CARPETA_BACKUP/
+
+# 6. Limpiar archivos temporales
+echo &quot;Limpiando archivos temporales...&quot;
+rm -f /tmp/wordpress_$FECHA.sql
+rm -f /tmp/taller_motos_$FECHA.sql
+rm -f /tmp/wordpress_files_$FECHA.tar.gz
+rm -f /tmp/config_$FECHA.tar.gz
+
+echo &quot;[$FECHA] Backup completado!&quot;
+</code></pre>
+<h3 id="92-automatizacion-con-cron">9.2 Automatización con cron</h3>
+<p>Entrada en el crontab del servidor principal:</p>
+<pre><code>0 2 * * * /bin/bash /opt/taller/backup.sh &gt;&gt; /var/log/backup.log 2&gt;&amp;1
+</code></pre>
+<p>Cada ejecución registra resultado y errores en <code>/var/log/backup.log</code>. Los archivos incluyen <strong>fecha y hora</strong> en el nombre.</p>
 <hr />
 <h2 id="10-verificacion-del-sistema">10. Verificación del sistema</h2>
-<p>Una vez completado el despliegue se verificó el correcto funcionamiento de todos los servicios:</p>
+<p>Tras el despliegue se validó la infraestructura con pruebas de sistema (prioridad ASIR):</p>
 <table>
 <thead>
 <tr>
-<th>URL</th>
-<th>Resultado</th>
+<th>Prueba</th>
+<th>Comando / acción</th>
+<th>Resultado esperado</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>https://fhdproyects.innc.link</code></td>
-<td>Web pública WordPress ✅</td>
+<td>Contenedores activos</td>
+<td><code>docker compose ps</code></td>
+<td>4 servicios Running / Healthy</td>
 </tr>
 <tr>
-<td><code>https://fhdproyects.innc.link/wp-admin</code></td>
-<td>Panel WordPress ✅</td>
+<td>MySQL no expuesto</td>
+<td><code>nc -zv 3.217.215.112 3306</code></td>
+<td>Conexión rechazada</td>
 </tr>
 <tr>
-<td><code>https://tallerfhd.gestiona/admin</code></td>
-<td>Login Filament ✅</td>
+<td>HTTPS activo</td>
+<td><code>curl -I https://fhdproyects.innc.link</code></td>
+<td>Respuesta 200/301 con TLS</td>
 </tr>
 <tr>
-<td><code>https://tallerfhd.gestiona/admin/clientes</code></td>
-<td>Listado de clientes ✅</td>
-</tr>
-<tr>
-<td><code>https://tallerfhd.gestiona/admin/motos</code></td>
-<td>Listado de motos ✅</td>
-</tr>
-<tr>
-<td><code>https://tallerfhd.gestiona/admin/reparaciones</code></td>
-<td>Listado de reparaciones ✅</td>
-</tr>
-<tr>
-<td><code>https://tallerfhd.gestiona/admin/mecanicos</code></td>
-<td>Listado de mecánicos ✅</td>
-</tr>
-<tr>
-<td><code>https://tallerfhd.gestiona/admin/lista-compras</code></td>
-<td>Lista de compra ✅</td>
-</tr>
-<tr>
+<td>DNS privado</td>
 <td><code>dig @18.213.221.53 tallerfhd.gestiona</code></td>
-<td>Resuelve 3.217.215.112 ✅</td>
+<td>Resuelve <code>3.217.215.112</code></td>
 </tr>
 <tr>
-<td>Backup nocturno en servidor independiente</td>
-<td>Ejecutado correctamente ✅</td>
+<td>Backup manual</td>
+<td><code>sudo bash /opt/taller/backup.sh</code></td>
+<td>Archivos en <code>/opt/backups/</code> del servidor remoto</td>
+</tr>
+<tr>
+<td>Persistencia</td>
+<td><code>docker compose restart</code> + comprobar datos</td>
+<td>Datos conservados en volúmenes</td>
 </tr>
 </tbody>
 </table>
-<p>Se comprobó también que los datos persisten tras reiniciar los contenedores y que MySQL <strong>no es accesible desde el exterior</strong> gracias al Security Group y a la red interna de Docker.</p>
-<hr />
-<h2 id="11-conclusiones-de-la-fase-de-desarrollo">11. Conclusiones de la fase de desarrollo</h2>
-<p>El uso combinado de <strong>AWS EC2</strong>, <strong>Elastic IP</strong>, <strong>Security Groups</strong>, <strong>Docker Compose</strong>, <strong>BIND9</strong> y un sistema de backups automáticos ha permitido desplegar una infraestructura modular, segura y reproducible en la que cada servicio corre de forma aislada y puede ser mantenido o actualizado de forma independiente. La separación en tres instancias garantiza que un fallo en un servidor no afecte al resto del sistema.</p>
+<p><strong>Accesos de aplicación</strong> (capa superior sobre la infraestructura):</p>
+<table>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Web pública WordPress</td>
+<td><code>https://fhdproyects.innc.link</code></td>
+</tr>
+<tr>
+<td>Panel Laravel/Filament</td>
+<td><code>https://tallerfhd.gestiona/admin</code> (solo DNS privado)</td>
+</tr>
+</tbody>
+</table>
 
 
 

@@ -521,10 +521,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-script-de-backup-automatico" class="md-nav__link">
+  <a href="#22-script-de-backup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 Script de backup automático
+        2.2 Script de backup
       
     </span>
   </a>
@@ -605,10 +605,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-script-de-backup-automatico" class="md-nav__link">
+  <a href="#22-script-de-backup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2 Script de backup automático
+        2.2 Script de backup
       
     </span>
   </a>
@@ -736,6 +736,15 @@ cat /var/log/backup.log
 # Ver archivos en el servidor de backups
 ssh -i ~/.ssh/backup_key ubuntu@54.165.242.48 &quot;ls -lh /opt/backups/&quot;
 </code></pre>
+<pre><code class="language-bash"># Comprobar que MySQL NO está expuesto
+nc -zv 3.217.215.112 3306
+
+# Comprobar resolución DNS privada
+dig @18.213.221.53 tallerfhd.gestiona
+
+# Comprobar HTTPS
+curl -I https://fhdproyects.innc.link
+</code></pre>
 <pre><code class="language-bash"># Cuando cambie la IP (si no hay Elastic IP)
 sed -i &quot;s|^APP_URL=.*|APP_URL=http://NUEVA-IP|&quot; /opt/taller/.env
 
@@ -749,67 +758,7 @@ docker compose exec db mysql -u root -p wordpress -e \
 docker compose down &amp;&amp; docker compose up -d
 </code></pre>
 <hr />
-<h3 id="22-script-de-backup-automatico">2.2 Script de backup automático</h3>
-<p>Script completo ubicado en <code>/opt/taller/backup.sh</code>, ejecutado cada noche a las 2:00 AM por <code>cron</code>:</p>
-<pre><code class="language-bash">#!/bin/bash
-
-# =====================================================
-# Script de backup automático — Taller FHD
-# Ejecutado cada noche a las 2:00 AM mediante cron
-# =====================================================
-
-FECHA=$(date +%Y%m%d_%H%M%S)
-SERVIDOR_BACKUP=&quot;ubuntu@54.165.242.48&quot;
-CLAVE_SSH=&quot;/home/ubuntu/.ssh/backup_key&quot;
-CARPETA_BACKUP=&quot;/opt/backups&quot;
-MYSQL_ROOT_PASS=&quot;TuPasswordRoot&quot;
-
-echo &quot;[$FECHA] Iniciando backup...&quot;
-
-# 1. Backup base de datos WordPress
-echo &quot;Haciendo backup de WordPress DB...&quot;
-docker compose -f /opt/taller/docker-compose.yml exec -T db \
-    mysqldump -u root -p&quot;$MYSQL_ROOT_PASS&quot; wordpress \
-    &gt; /tmp/wordpress_$FECHA.sql
-
-# 2. Backup base de datos taller_motos
-echo &quot;Haciendo backup de taller_motos DB...&quot;
-docker compose -f /opt/taller/docker-compose.yml exec -T db \
-    mysqldump -u root -p&quot;$MYSQL_ROOT_PASS&quot; taller_motos \
-    &gt; /tmp/taller_motos_$FECHA.sql
-
-# 3. Backup archivos WordPress
-echo &quot;Haciendo backup de archivos WordPress...&quot;
-docker run --rm \
-    -v wordpress_files:/data \
-    -v /tmp:/backup \
-    alpine tar czf /backup/wordpress_files_$FECHA.tar.gz -C /data .
-
-# 4. Backup configuración /opt/taller
-echo &quot;Haciendo backup de configuración...&quot;
-tar czf /tmp/config_$FECHA.tar.gz --exclude=/opt/taller/nginx/certs /opt/taller
-
-# 5. Enviar todo al servidor de backups
-echo &quot;Enviando backups al servidor remoto...&quot;
-rsync -avz -e &quot;ssh -i $CLAVE_SSH -o StrictHostKeyChecking=no&quot; \
-    /tmp/wordpress_$FECHA.sql \
-    /tmp/taller_motos_$FECHA.sql \
-    /tmp/wordpress_files_$FECHA.tar.gz \
-    /tmp/config_$FECHA.tar.gz \
-    $SERVIDOR_BACKUP:$CARPETA_BACKUP/
-
-# 6. Limpiar archivos temporales
-echo &quot;Limpiando archivos temporales...&quot;
-rm -f /tmp/wordpress_$FECHA.sql
-rm -f /tmp/taller_motos_$FECHA.sql
-rm -f /tmp/wordpress_files_$FECHA.tar.gz
-rm -f /tmp/config_$FECHA.tar.gz
-
-echo &quot;[$FECHA] Backup completado!&quot;
-</code></pre>
-<p>Configuración del cron en el servidor principal:</p>
-<pre><code>0 2 * * * /bin/bash /opt/taller/backup.sh &gt;&gt; /var/log/backup.log 2&gt;&amp;1
-</code></pre>
+<h3 id="22-script-de-backup">2.2 Script de backup</h3>
 
 
 

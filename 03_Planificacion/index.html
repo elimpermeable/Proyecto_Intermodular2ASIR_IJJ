@@ -904,43 +904,31 @@ Cada miembro asume un rol principal, aunque existe colaboración puntual entre r
 <hr />
 <h3 id="12-distribucion-de-roles-y-responsabilidades">1.2 Distribución de roles y responsabilidades</h3>
 <h4 id="rol-1-responsable-de-infraestructura-y-sistemas">Rol 1: Responsable de infraestructura y sistemas</h4>
-<p>Este rol se encarga del diseño, implementación y mantenimiento de la infraestructura técnica del proyecto, incluyendo las tres instancias EC2, Docker, sus contenedores, volúmenes, el servidor DNS y el sistema de backups.</p>
+<p>Diseño, implementación y mantenimiento de las tres instancias EC2, Docker, DNS (BIND9), HTTPS, Security Groups y sistema de backups.</p>
 <p><strong>Funciones principales:</strong></p>
 <ul>
-<li>Instalación y configuración del sistema operativo Ubuntu Server 24.04 en las tres instancias EC2.</li>
-<li>Asignación de Elastic IPs y configuración de Security Groups en AWS.</li>
-<li>Instalación y configuración de Docker Engine + Docker Compose v2.</li>
-<li>Diseño de la arquitectura de contenedores y red interna <code>taller_network</code>.</li>
-<li>Configuración de volúmenes persistentes para contenedores.</li>
-<li>Implementación y configuración del servidor DNS con BIND9.</li>
-<li>Creación de zonas DNS para los dominios del taller.</li>
-<li>Implementación del sistema de copias de seguridad automáticas con <code>mysqldump</code>, <code>rsync</code> y <code>cron</code>.</li>
-<li>Configuración del acceso remoto seguro mediante SSH con claves RSA.</li>
-<li>Gestión de certificados SSL de Cloudflare para habilitar HTTPS.</li>
+<li>Despliegue y administración de Ubuntu Server 24.04 en AWS.</li>
+<li>Orquestación de contenedores, redes y volúmenes con Docker Compose v2.</li>
+<li>Configuración de BIND9, certificados SSL y script de backup automatizado.</li>
+<li>Acceso remoto seguro por SSH con claves RSA.</li>
 </ul>
 <hr />
 <h4 id="rol-2-responsable-de-la-base-de-datos">Rol 2: Responsable de la base de datos</h4>
-<p>Este rol se centra en la implantación y la gestión de la base de datos.</p>
+<p>Implantación y gestión de MySQL 8.0: esquema relacional del taller, usuarios con privilegios mínimos e integración con WordPress y Laravel.</p>
 <p><strong>Funciones principales:</strong></p>
 <ul>
-<li>Instalación y configuración del contenedor de MySQL 8.0.</li>
-<li>Diseño y creación de las dos bases de datos: <code>wordpress</code> y <code>taller_motos</code>.</li>
-<li>Definición de tablas, claves primarias y claves foráneas en español.</li>
-<li>Creación del esquema relacional con 5 tablas: clientes, motos, reparaciones, mecánicos y lista de compra.</li>
-<li>Integración de WordPress con la base de datos MySQL.</li>
-<li>Integración de Laravel 12 con la base de datos <code>taller_motos</code> mediante Eloquent ORM.</li>
-<li>Gestión de usuarios y permisos con privilegios mínimos (<code>wp_user</code> y <code>laravel_user</code>).</li>
+<li>Diseño del esquema <code>taller_motos</code> (5 tablas en español).</li>
+<li>Script de inicialización <code>01_init.sql</code> y usuarios <code>wp_user</code> / <code>laravel_user</code>.</li>
+<li>Validación de persistencia e inclusión en el sistema de backups.</li>
 </ul>
 <hr />
 <h4 id="rol-3-responsable-de-diseno-de-aplicacion-y-seguridad">Rol 3: Responsable de diseño de aplicación y seguridad</h4>
-<p>Este rol se encarga del diseño de la página WordPress, del panel de administración Laravel/Filament y de la seguridad perimetral del servidor.</p>
+<p>Implantación de WordPress y Laravel/Filament sobre la infraestructura, y revisión de la seguridad perimetral en AWS.</p>
 <p><strong>Funciones principales:</strong></p>
 <ul>
-<li>Diseño de la página web WordPress a nivel de frontend y backend.</li>
-<li>Instalación y configuración de Laravel 12 + Filament v3 como panel de administración privado.</li>
-<li>Creación de los módulos de gestión: Clientes, Motos, Reparaciones, Mecánicos y Lista de Compra.</li>
-<li>Verificación del correcto acceso a WordPress y al panel desde la web.</li>
-<li>Configuración de Security Groups de AWS para minimizar la exposición de puertos no deseados.</li>
+<li>Despliegue de WordPress (web pública) y Laravel 12 + Filament v3 (panel privado).</li>
+<li>Módulos de gestión del taller en Filament.</li>
+<li>Verificación de accesos y revisión de Security Groups.</li>
 </ul>
 <hr />
 <h3 id="13-planificacion-por-fases">1.3 Planificación por fases</h3>

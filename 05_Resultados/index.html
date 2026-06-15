@@ -457,22 +457,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-infraestructura-desplegada" class="md-nav__link">
+  <a href="#3-evidencias-del-despliegue" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Infraestructura desplegada
+        3. Evidencias del despliegue
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Infraestructura desplegada">
+    <nav class="md-nav" aria-label="3. Evidencias del despliegue">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-servidor-principal" class="md-nav__link">
+  <a href="#31-servidor-principal-contenedores-docker" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1 Servidor principal
+        3.1 Servidor principal — contenedores Docker
       
     </span>
   </a>
@@ -480,10 +480,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-web-publica-wordpress" class="md-nav__link">
+  <a href="#32-servidor-dns-con-bind9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2 Web pública WordPress
+        3.2 Servidor DNS con BIND9
       
     </span>
   </a>
@@ -491,10 +491,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-panel-de-administracion-laravel-filament" class="md-nav__link">
+  <a href="#33-sistema-de-copias-de-seguridad" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3 Panel de administración Laravel + Filament
+        3.3 Sistema de copias de seguridad
       
     </span>
   </a>
@@ -513,21 +513,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-servidor-dns-con-bind9" class="md-nav__link">
+  <a href="#35-aplicaciones-web" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5 Servidor DNS con BIND9
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#36-sistema-de-copias-de-seguridad" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.6 Sistema de copias de seguridad
+        3.5 Aplicaciones web
       
     </span>
   </a>
@@ -672,22 +661,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-infraestructura-desplegada" class="md-nav__link">
+  <a href="#3-evidencias-del-despliegue" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Infraestructura desplegada
+        3. Evidencias del despliegue
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Infraestructura desplegada">
+    <nav class="md-nav" aria-label="3. Evidencias del despliegue">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-servidor-principal" class="md-nav__link">
+  <a href="#31-servidor-principal-contenedores-docker" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1 Servidor principal
+        3.1 Servidor principal — contenedores Docker
       
     </span>
   </a>
@@ -695,10 +684,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-web-publica-wordpress" class="md-nav__link">
+  <a href="#32-servidor-dns-con-bind9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2 Web pública WordPress
+        3.2 Servidor DNS con BIND9
       
     </span>
   </a>
@@ -706,10 +695,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-panel-de-administracion-laravel-filament" class="md-nav__link">
+  <a href="#33-sistema-de-copias-de-seguridad" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3 Panel de administración Laravel + Filament
+        3.3 Sistema de copias de seguridad
       
     </span>
   </a>
@@ -728,21 +717,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-servidor-dns-con-bind9" class="md-nav__link">
+  <a href="#35-aplicaciones-web" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5 Servidor DNS con BIND9
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#36-sistema-de-copias-de-seguridad" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.6 Sistema de copias de seguridad
+        3.5 Aplicaciones web
       
     </span>
   </a>
@@ -852,9 +830,10 @@
 </tbody>
 </table>
 <hr />
-<h2 id="3-infraestructura-desplegada">3. Infraestructura desplegada</h2>
-<h3 id="31-servidor-principal">3.1 Servidor principal</h3>
-<p>Cuatro contenedores Docker operativos en red interna <code>taller_network</code>:</p>
+<h2 id="3-evidencias-del-despliegue">3. Evidencias del despliegue</h2>
+<p>Las pruebas se organizan por capas de infraestructura (prioridad ASIR). Las aplicaciones web se validan al final.</p>
+<h3 id="31-servidor-principal-contenedores-docker">3.1 Servidor principal — contenedores Docker</h3>
+<p>Cuatro contenedores operativos en red interna <code>taller_network</code>:</p>
 <table>
 <thead>
 <tr>
@@ -888,25 +867,24 @@
 </table>
 <p><img alt="Estado de los contenedores Docker" src="../images/dockerpsa.png" /></p>
 <hr />
-<h3 id="32-web-publica-wordpress">3.2 Web pública WordPress</h3>
-<p>La página web del taller <strong>FHD Proyects</strong> es accesible públicamente en <code>https://fhdproyects.innc.link</code> con certificado SSL válido.</p>
-<p><img alt="Web pública WordPress" src="../images/wordpress_web.png" /></p>
-<hr />
-<h3 id="33-panel-de-administracion-laravel-filament">3.3 Panel de administración Laravel + Filament</h3>
-<p>El panel privado de gestión del taller es accesible en <code>https://tallerfhd.gestiona/admin</code> únicamente desde equipos con el DNS privado configurado.</p>
-<p><img alt="Módulo de reparaciones" src="../images/filament_reparaciones.png" /></p>
-<hr />
-<h3 id="34-base-de-datos">3.4 Base de datos</h3>
-<p>La base de datos <code>taller_motos</code> contiene las 5 tablas diseñadas con sus relaciones correctamente establecidas.</p>
-<p><img alt="Tablas de la base de datos taller_motos" src="../images/mysql_tables.png" /></p>
-<hr />
-<h3 id="35-servidor-dns-con-bind9">3.5 Servidor DNS con BIND9</h3>
-<p>El servidor DNS privado resuelve correctamente los dominios del taller, incluyendo el dominio inventado <code>tallerfhd.gestiona</code> que no existe en Cloudflare.</p>
+<h3 id="32-servidor-dns-con-bind9">3.2 Servidor DNS con BIND9</h3>
+<p>El DNS privado resuelve correctamente los dominios del taller, incluido <code>tallerfhd.gestiona</code> (solo existe en BIND9).</p>
 <p><img alt="Resolución DNS con BIND9" src="../images/dns_dig.png" /></p>
 <hr />
-<h3 id="36-sistema-de-copias-de-seguridad">3.6 Sistema de copias de seguridad</h3>
-<p>El sistema de backups automáticos funciona correctamente, enviando las copias de seguridad al servidor independiente cada noche.</p>
+<h3 id="33-sistema-de-copias-de-seguridad">3.3 Sistema de copias de seguridad</h3>
+<p>Backups automáticos recibidos cada noche en el servidor independiente.</p>
 <p><img alt="Archivos de backup en el servidor independiente" src="../images/backups_ls.png" /></p>
+<hr />
+<h3 id="34-base-de-datos">3.4 Base de datos</h3>
+<p>La base <code>taller_motos</code> contiene las 5 tablas con relaciones correctamente establecidas.</p>
+<p><img alt="Tablas de la base de datos taller_motos" src="../images/mysql_tables.png" /></p>
+<hr />
+<h3 id="35-aplicaciones-web">3.5 Aplicaciones web</h3>
+<p>Con la infraestructura validada, las aplicaciones implantadas funcionan correctamente:</p>
+<p><strong>Web pública WordPress</strong> — <code>https://fhdproyects.innc.link</code></p>
+<p><img alt="Web pública WordPress" src="../images/wordpress_web.png" /></p>
+<p><strong>Panel de gestión Laravel/Filament</strong> — <code>https://tallerfhd.gestiona/admin</code> (solo DNS privado)</p>
+<p><img alt="Módulo de reparaciones" src="../images/filament_reparaciones.png" /></p>
 <hr />
 <h2 id="4-metricas-del-sistema">4. Métricas del sistema</h2>
 <table>
