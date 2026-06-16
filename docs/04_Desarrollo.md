@@ -208,9 +208,8 @@ La personalización del panel (modelos Eloquent, Resources de Filament) es la ca
 
 Se desplegó una segunda instancia EC2 (`18.213.221.53`) con **BIND9** para proporcionar resolución de nombres propia e independiente de Cloudflare.
 
-Se configuraron dos zonas DNS:
+Se configuro la siguiente zona DNS:
 
-- `fhdproyects.innc.link` → `3.217.215.112`
 - `tallerfhd.gestiona` → `3.217.215.112` (dominio inventado, solo existe en este DNS)
 
 El portátil del administrador se configuró en `/etc/systemd/resolved.conf` para usar `18.213.221.53` como DNS primario, con `1.1.1.1` como fallback. Esto permite:

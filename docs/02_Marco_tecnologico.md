@@ -108,8 +108,7 @@ Cuatro contenedores en el servidor principal, conectados por la red interna `tal
 El servidor DNS proporciona resolución de nombres independiente de Cloudflare, permitiendo el acceso a los dominios del taller incluso en entornos donde el DNS público esté bloqueado (como el WiFi del centro educativo).
 
 - **Software:** BIND9 en instancia EC2 independiente (`18.213.221.53`)
-- **Zonas configuradas:**
-  - `fhdproyects.innc.link` → `3.217.215.112` (mismo registro que Cloudflare)
+- **Zona configurada:**
   - `tallerfhd.gestiona` → `3.217.215.112` (dominio privado, solo existe en este DNS)
 
 **Funcionamiento según el escenario:**
@@ -153,7 +152,7 @@ La base de datos `taller_motos` contiene **cinco tablas** interrelacionadas (cli
 
 1. El usuario introduce el dominio en el navegador.
 2. El equipo consulta su servidor DNS configurado:
-   - Si apunta al **DNS privado** → resuelve `tallerfhd.gestiona` o `fhdproyects.innc.link`
+   - Si apunta al **DNS privado** → resuelve `tallerfhd.gestiona`
    - Si apunta a **Cloudflare** → resuelve solo `fhdproyects.innc.link`
 3. La solicitud llega al contenedor **Nginx** en la IP `3.217.215.112`.
 4. Nginx redirige HTTP → HTTPS (redirección 301).

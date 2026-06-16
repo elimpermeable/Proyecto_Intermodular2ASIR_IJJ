@@ -20,7 +20,7 @@ El equipo de trabajo se estructura en los siguientes roles principales:
 
 #### Rol 1: Responsable de infraestructura y sistemas
 
-Diseño, implementación y mantenimiento de las tres instancias EC2, Docker, DNS (BIND9), HTTPS, Security Groups y sistema de backups.
+Diseño, implementación y mantenimiento de las tres instancias EC2, Docker, DNS (BIND9), HTTPS y sistema de backups.
 
 **Funciones principales:**
 
