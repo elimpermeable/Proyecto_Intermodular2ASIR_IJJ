@@ -1040,8 +1040,7 @@
 <p>El servidor DNS proporciona resolución de nombres independiente de Cloudflare, permitiendo el acceso a los dominios del taller incluso en entornos donde el DNS público esté bloqueado (como el WiFi del centro educativo).</p>
 <ul>
 <li><strong>Software:</strong> BIND9 en instancia EC2 independiente (<code>18.213.221.53</code>)</li>
-<li><strong>Zonas configuradas:</strong></li>
-<li><code>fhdproyects.innc.link</code> → <code>3.217.215.112</code> (mismo registro que Cloudflare)</li>
+<li><strong>Zona configurada:</strong></li>
 <li><code>tallerfhd.gestiona</code> → <code>3.217.215.112</code> (dominio privado, solo existe en este DNS)</li>
 </ul>
 <p><strong>Funcionamiento según el escenario:</strong></p>
@@ -1121,7 +1120,7 @@
 <ol>
 <li>El usuario introduce el dominio en el navegador.</li>
 <li>El equipo consulta su servidor DNS configurado:</li>
-<li>Si apunta al <strong>DNS privado</strong> → resuelve <code>tallerfhd.gestiona</code> o <code>fhdproyects.innc.link</code></li>
+<li>Si apunta al <strong>DNS privado</strong> → resuelve <code>tallerfhd.gestiona</code></li>
 <li>Si apunta a <strong>Cloudflare</strong> → resuelve solo <code>fhdproyects.innc.link</code></li>
 <li>La solicitud llega al contenedor <strong>Nginx</strong> en la IP <code>3.217.215.112</code>.</li>
 <li>Nginx redirige HTTP → HTTPS (redirección 301).</li>
